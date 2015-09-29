@@ -15,8 +15,6 @@ public class KepMenu extends kepernyo_os_obj {
 	alakzat aHatter;
 	alakzat aMini;
 	alakzat aHalp;
-	alakzat aGyro_van;
-	alakzat aGyro_nincs;
 	public float betumeret = h / 40;
 	public boolean main_menubol, render, jatek_van = false, kattintva = false,giro = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
 	public Sound sFaf;
@@ -37,8 +35,6 @@ public class KepMenu extends kepernyo_os_obj {
 		aKilep = new alakzat(this, "exit2.png", 40, false);
 		aMini = new alakzat(this, "valami.png", 40, false);
 		aHalp = new alakzat(this, "help.png", 400, false);
-		aGyro_van = new alakzat(this, "box_checked.png", h / 20, false);
-		aGyro_nincs = new alakzat(this, "box.png", h / 20, false);
 
 		aStart.offset_engedelyezes = false;
 		aResume.offset_engedelyezes = false;
@@ -46,8 +42,7 @@ public class KepMenu extends kepernyo_os_obj {
 		aKilep.offset_engedelyezes = false;
 		aMini.offset_engedelyezes = false;
 		aHalp.offset_engedelyezes = false;
-		aGyro_nincs.offset_engedelyezes = false;
-		aGyro_van.offset_engedelyezes = false;
+
 		aKilep.offset_engedelyezes = false;
 		sFaf = Gdx.audio.newSound(Gdx.files.internal("exterminate.mp3"));
 	}
@@ -74,9 +69,6 @@ public class KepMenu extends kepernyo_os_obj {
 
 		aHalp.atmeretez(w / 4, h / 10);
 		aHalp.atHelyez(w / 2 - aHalp.getW() / 2, h / 2 - aHalp.getH() / 2 - betumeret * 3);
-
-		aGyro_van.atHelyez(w / 2 - aHalp.getW() / 2, aHalp.getY() - betumeret * 3);
-		aGyro_nincs.atHelyez(w / 2 - aHalp.getW() / 2, aHalp.getY() - betumeret * 3);
 
 		aKilep.atHelyez(w - aKilep.getSzelesseg(), h - aKilep.getMagassag());
 
@@ -111,13 +103,6 @@ public class KepMenu extends kepernyo_os_obj {
 			
 			Gdx.app.exit();
 		}
-		if (aGyro_van.benneVaneXY(x, y)) {
-			if (giro) {
-				giro = false;
-			} else {
-				giro = true;
-			}
-		}
 		return false;
 	}
 	
@@ -134,14 +119,6 @@ public class KepMenu extends kepernyo_os_obj {
 		aMini.rajzol(batch);
 		aHatter.rajzol(batch);
 
-		if (Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer)) {
-			betuiras.render_balra(batch, aGyro_van.getX() + aGyro_van.getW() + 5, aGyro_van.getY() + 2, "Gyroscope on/off", betumeret, false);
-			if (giro) {
-				aGyro_van.rajzol(batch);
-			} else {
-				aGyro_nincs.rajzol(batch);
-			}
-		}
 		if (kattintva) {
 			if (ablakRef.kepernyoJatekter.jatek_vege) {
 				aStart.rajzol(batch);
@@ -158,8 +135,6 @@ public class KepMenu extends kepernyo_os_obj {
 	/** Itt sz�nnek meg a textur�k. */
 	@Override
 	public void jatekmenet_megszuntet() {
-		aGyro_van.dispose();
-		aGyro_nincs.dispose();
 		aResume.dispose();
 		aStart.dispose();
 		aMini.dispose();
