@@ -77,7 +77,7 @@ public abstract class kepernyo_os_obj implements Runnable {
 	 * le.
 	 */
 	public void jatekmenet_giroszkop_Le(float mertek) {
-	};
+	}
 
 	public kepernyo_os_obj(GdxAblak ablak) {
 		w = Gdx.graphics.getWidth();

@@ -17,7 +17,7 @@ public class alakzat {
 	private Sprite ss;
 	private boolean kor_e;
 	private boolean peldanyositott_textura = false;
-	public boolean offset_engedelyezes = true;
+	public boolean offset_engedelyezes = false;
 	public kepernyo_os_obj kepRef;
 
 	/** Bal alsó sarok */

@@ -83,11 +83,7 @@ public class KepJatekter extends kepernyo_os_obj {
 		}
 		}// ellenfelek mozgat�s �rt�k felt�ltve
 	public boolean tap(float x, float y, int count, int button) {
-		if (jatek_vege) {
-			if (aNext.benneVaneXY(x, y)) {
-				ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
-			}
-		}
+
 		if (aKilep.benneVaneXY(x, y)) {
 			ablakRef.kepernyo_csere(ablakRef.kepernyoMenu);
 		}

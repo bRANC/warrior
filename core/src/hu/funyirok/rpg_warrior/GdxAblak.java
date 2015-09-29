@@ -117,8 +117,10 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 		batch.setProjectionMatrix(camera.combined);
 		camera.rotate(1, 0, 0, 0);
 
-		camera.position.x = kepernyoFuto.offset_x;
-		camera.position.y = kepernyoFuto.offset_y;
+		/*camera.position.x = kepernyoFuto.offset_x;
+		camera.position.y = kepernyoFuto.offset_y;*/
+		camera.position.x = 0;
+		camera.position.y = 0;
 		// camera.position.z = ;
 
 		batch.begin();
