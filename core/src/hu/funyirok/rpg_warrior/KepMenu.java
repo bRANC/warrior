@@ -33,14 +33,14 @@ public class KepMenu extends kepernyo_os_obj {
 		aResume = new alakzat(this, "res.png", 400, false);
 		aHatter = new alakzat(this, "frame.png", 500, false);
 		aKilep = new alakzat(this, "exit2.png", 40, false);
-		aMini = new alakzat(this, "valami.png", 40, false);
+		////aMini = new alakzat(this, "valami.png", 40, false);
 		aHalp = new alakzat(this, "help.png", 400, false);
 
 		aStart.offset_engedelyezes = false;
 		aResume.offset_engedelyezes = false;
 		aHatter.offset_engedelyezes = false;
 		aKilep.offset_engedelyezes = false;
-		aMini.offset_engedelyezes = false;
+//		aMini.offset_engedelyezes = false;
 		aHalp.offset_engedelyezes = false;
 
 		aKilep.offset_engedelyezes = false;
@@ -56,8 +56,8 @@ public class KepMenu extends kepernyo_os_obj {
 		super.jatekmenet_atmeretez();
 		betumeret = h / 40;
 
-		aHatter.atmeretez((float) w - h / 10, (float) h - h / 10);
-		aHatter.atHelyez(h / 20, h / 20);
+		aHatter.atmeretez( w,  h);
+
 
 		aStart.atmeretez(w / 4, h / 10);
 		aStart.atHelyez(w / 2 - aStart.getW() / 2, h / 2 - aStart.getH() / 2 + betumeret * 3);
@@ -65,7 +65,7 @@ public class KepMenu extends kepernyo_os_obj {
 		aResume.atmeretez(w / 4, h / 10);
 		aResume.atHelyez(w / 2 - aResume.getW() / 2, h / 2 - aResume.getH() / 2 + betumeret * 3);
 
-		aMini.atmeretez((float) w, (float) h);
+//		aMini.atmeretez((float) w, (float) h);
 
 		aHalp.atmeretez(w / 4, h / 10);
 		aHalp.atHelyez(w / 2 - aHalp.getW() / 2, h / 2 - aHalp.getH() / 2 - betumeret * 3);
@@ -116,7 +116,7 @@ public class KepMenu extends kepernyo_os_obj {
 	@Override
 	public void jatekmenet_render(SpriteBatch batch) {
 		ablakRef.update();
-		aMini.rajzol(batch);
+//		aMini.rajzol(batch);
 		aHatter.rajzol(batch);
 
 		if (kattintva) {
@@ -137,7 +137,7 @@ public class KepMenu extends kepernyo_os_obj {
 	public void jatekmenet_megszuntet() {
 		aResume.dispose();
 		aStart.dispose();
-		aMini.dispose();
+	//	aMini.dispose();
 		aHatter.dispose();
 		aKilep.dispose();
 		aHalp.dispose();
