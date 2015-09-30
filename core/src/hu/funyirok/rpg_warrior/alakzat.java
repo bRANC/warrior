@@ -312,8 +312,8 @@ public class alakzat {
 				batch.draw(tt, ss.getX() - kepRef.ablakRef.w / 2, ss.getY() - kepRef.ablakRef.w / 2, ss.getWidth(), ss.getHeight());
 			}
 		}*/
-		batch.draw(tt, ss.getX() + kepRef.offset_x - kepRef.ablakRef.w / 2, ss.getY() + kepRef.offset_y - kepRef.ablakRef.h / 2, ss.getWidth(), ss.getHeight());
-		//batch.draw(tt, ss.getX()-kepRef.w/2, ss.getY()-kepRef.h/2, ss.getWidth(), ss.getHeight());
+		//batch.draw(tt, ss.getX() + kepRef.offset_x - kepRef.ablakRef.w / 2, ss.getY() + kepRef.offset_y - kepRef.ablakRef.h / 2, ss.getWidth(), ss.getHeight());
+		batch.draw(tt, ss.getX()-kepRef.w/2, ss.getY()-kepRef.h/2, ss.getWidth(), ss.getHeight());
 	}
 
 	/**

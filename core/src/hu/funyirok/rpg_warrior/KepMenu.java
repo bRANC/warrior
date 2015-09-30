@@ -2,7 +2,6 @@
 package hu.funyirok.rpg_warrior;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class KepMenu extends kepernyo_os_obj {
@@ -10,13 +9,10 @@ public class KepMenu extends kepernyo_os_obj {
     alakzat aStart;
     alakzat aResume;
     alakzat aKilep;
-    alakzat aRajz;
     alakzat aHatter;
-    alakzat aMini;
     alakzat aHalp;
     public float betumeret = h / 40;
-    public boolean main_menubol, jatek_van = false, kattintva = false, jatekbaugras = false;
-    public Sound sFaf;
+    public boolean main_menubol, kattintva = false, jatekbaugras = false;
 
 
     /**
@@ -34,7 +30,7 @@ public class KepMenu extends kepernyo_os_obj {
         aStart = new alakzat(this, "newgame.png", 400, false);
         aResume = new alakzat(this, "res.png", 400, false);
         aHatter = new alakzat(this, "frame.png", 500, false);
-        aKilep = new alakzat(this, "exit2.png", 40, false);
+        aKilep = new alakzat(this, "exit2.png", 50, false);
         ////aMini = new alakzat(this, "valami.png", 40, false);
         aHalp = new alakzat(this, "help.png", 400, false);
 
@@ -46,7 +42,6 @@ public class KepMenu extends kepernyo_os_obj {
         aHalp.offset_engedelyezes = false;
 
         aKilep.offset_engedelyezes = false;
-        sFaf = Gdx.audio.newSound(Gdx.files.internal("exterminate.mp3"));
     }
 
     /**
@@ -87,17 +82,17 @@ public class KepMenu extends kepernyo_os_obj {
     public boolean tap(float x, float y, int count, int button) {
 
         if (aStart.benneVaneXY(x, y)) {
-            System.out.println("aStart");
             kattintva = true;
 
-            if (ablakRef.kepernyoJatekter.jatek_vege) {
+
+            if (!ablakRef.kepernyotoltes.valasztva) {
                 main_menubol = true;
-                ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+                ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
             } else {
                 main_menubol = true;
-                System.out.println("képrenyőtöltés");
-                ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
+                ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
             }
+
         }
 
         if (aHalp.benneVaneXY(x, y)) {

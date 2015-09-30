@@ -1,10 +1,8 @@
 //Itt kell kifejteni a k�perny� menet�t, v�lzot�it.
 package hu.funyirok.rpg_warrior;
 
-import java.util.ArrayList;
 import java.util.Random;
 
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -46,12 +44,6 @@ public class KepJatekter extends kepernyo_os_obj {
 		aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
 		aHatter = new alakzat(this, "hatterspace.jpg", 10, false);
 
-		aKilep.offset_engedelyezes = false;
-		aHatter.offset_engedelyezes = false;
-
-
-		aNext.offset_engedelyezes = false;
-		aStart.offset_engedelyezes = false;
 
 
 		bg_r = (float) 0.5; // Be�ll�tom a h�tt�rsz�nt...
@@ -121,6 +113,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
 	@Override
 	public void jatekmenet_render(SpriteBatch batch) {
+
 		if (!jatek_vege) {
 
 		}
@@ -142,6 +135,7 @@ public class KepJatekter extends kepernyo_os_obj {
 		if (!jatek_vege) {
 			aKilep.rajzol(batch);
 		}
+
 	}
 
 	@Override

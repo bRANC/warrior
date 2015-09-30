@@ -20,9 +20,10 @@ public class KepToltes extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_letrehoz() {
-        aKilep= new alakzat(this,"vissza.png",10,false);
+        aKilep= new alakzat(this,"vissza.png",50,false);
         aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
         aHatter = new alakzat(this, "frame.png", 10, false);
+
 
         jat2 = new alakzat(this, "res.png", 200, false);
         jat2.atmeretez(w / 4, h / 10);
@@ -58,7 +59,6 @@ public class KepToltes extends kepernyo_os_obj {
         jat5.atmeretez(w / 4, h / 10);
         jat5.atHelyez(w / 2 + betumeret * 2, h / 2 - jat5.getH() / 2 - betumeret * 3);
         aHatter.atmeretez(w, h);
-        //aHatter.atHelyez(0, 0);
     }
 
     @Override
@@ -68,21 +68,15 @@ public class KepToltes extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
-        System.out.println("képtöltés render");
-        if (!ablakRef.kepernyoJatekter.jatek_vege && !ablakRef.kepernyoMenu.jatekbaugras) {
-            System.out.println(ablakRef.kepernyoJatekter.jatek_vege+ " " + ablakRef.kepernyoMenu.jatekbaugras);
-            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
-        }
         aHatter.rajzol(batch);
         jat2.rajzol(batch);
         jat3.rajzol(batch);
         jat4.rajzol(batch);
         jat5.rajzol(batch);
-
+        aKilep.rajzol(batch);
         //kiertekeles();
 
         if (valasztva) {
-            System.out.println("választva: "+valasztva);
             ablakRef.kepernyoMenu.jatekbaugras=true;
             ablakRef.kepernyoJatekter.jatekmenet_megszuntet();
             ablakRef.kepernyoJatekter = null;
@@ -99,6 +93,7 @@ public class KepToltes extends kepernyo_os_obj {
         jat4.dispose();
         jat5.dispose();
         aHatter.dispose();
+        aKilep.dispose();
         //betuiras.dispose();
     }
 
