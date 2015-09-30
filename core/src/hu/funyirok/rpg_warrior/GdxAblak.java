@@ -42,6 +42,7 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 		kepernyoThread = null;
 		kepernyoFuto = kepernyoUj;
 		kepernyoFuto.folytat();
+
 		kepernyoThread = new Thread(kepernyoFuto);
 		try {
 			Thread.sleep(100);

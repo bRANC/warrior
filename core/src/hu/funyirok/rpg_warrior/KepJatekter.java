@@ -13,7 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class KepJatekter extends kepernyo_os_obj {
 
 	// http://sourceforge.net/projects/launch4j/files/launch4j-3/3.1.0-beta1/
-
+	public float betumeret=h/40;
 	protected Szoveg betuiras = new Szoveg(this);
 	alakzat aKilep, aHatter,  aNext;
 	alakzat aStart;
@@ -34,7 +34,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
 	public void jatekmenet_letrehoz() {
 		ablakRef.kepernyotoltes.lefutott = true;
-
+		betumeret=h/40;
 		aStart = new alakzat(this, "newgame.png", 400, false);
 		aNext = new alakzat(this, "nextgame.png", 400, false);
 
@@ -43,6 +43,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
 
 		aKilep = new alakzat(this, "vissza.png", 50, false);
+		aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
 		aHatter = new alakzat(this, "hatterspace.jpg", 10, false);
 
 		aKilep.offset_engedelyezes = false;
@@ -68,6 +69,8 @@ public class KepJatekter extends kepernyo_os_obj {
 	@Override
 	public void jatekmenet_atmeretez() {
 		super.jatekmenet_atmeretez();
+		betumeret=h/40;
+		aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
 
 		aNext.atmeretez(w / 4, h / 10);
 		aNext.atHelyez(w / 2 - aNext.getW() / 2, h / 2 - aNext.getH() - 100);

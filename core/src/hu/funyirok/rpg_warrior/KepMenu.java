@@ -2,7 +2,6 @@
 package hu.funyirok.rpg_warrior;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -16,7 +15,7 @@ public class KepMenu extends kepernyo_os_obj {
     alakzat aMini;
     alakzat aHalp;
     public float betumeret = h / 40;
-    public boolean main_menubol, render, jatek_van = false, kattintva = false, jatekbaugras=false;
+    public boolean main_menubol, jatek_van = false, kattintva = false, jatekbaugras = false;
     public Sound sFaf;
 
 
@@ -73,7 +72,7 @@ public class KepMenu extends kepernyo_os_obj {
         aHalp.atmeretez(w / 4, h / 10);
         aHalp.atHelyez(w / 2 - aHalp.getW() / 2, h / 2 - aHalp.getH() / 2 - betumeret * 3);
 
-        aKilep.atHelyez(w - aKilep.getSzelesseg(), h - aKilep.getMagassag());
+        aKilep.atHelyez(w - aKilep.getSzelesseg() - betumeret, h - aKilep.getMagassag() - betumeret);
 
     }
 
@@ -88,18 +87,18 @@ public class KepMenu extends kepernyo_os_obj {
     public boolean tap(float x, float y, int count, int button) {
 
         if (aStart.benneVaneXY(x, y)) {
-
+            System.out.println("aStart");
             kattintva = true;
-            //ablakRef.kepernyo_csere(ablakRef.kepernyotoltes,2);
 
-            if (ablakRef.kepernyoJatekter.jatek_vege)
+            if (ablakRef.kepernyoJatekter.jatek_vege) {
                 main_menubol = true;
-            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
-        } else {
-            main_menubol = true;
-            ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
+                ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+            } else {
+                main_menubol = true;
+                System.out.println("képrenyőtöltés");
+                ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
+            }
         }
-
 
         if (aHalp.benneVaneXY(x, y)) {
             ablakRef.kepernyo_csere(ablakRef.KepernyoSugo);
@@ -109,12 +108,6 @@ public class KepMenu extends kepernyo_os_obj {
             Gdx.app.exit();
         }
         return false;
-    }
-
-    public void jatek_letrehoz() {
-        if (dev) System.out.println("l�trehozn�m");
-        ablakRef.kepernyoJatekter = new KepJatekter(ablakRef);
-        if (dev) System.out.println("l�trehoztam");
     }
 
     /**

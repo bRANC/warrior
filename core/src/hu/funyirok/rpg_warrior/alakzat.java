@@ -304,15 +304,16 @@ public class alakzat {
 		 * ss.getWidth(), ss.getHeight()); } }
 		 */
 
-		if (!offset_engedelyezes) {
+		/*if (!offset_engedelyezes) {
 			batch.draw(tt, ss.getX() + kepRef.offset_x - kepRef.ablakRef.w / 2, ss.getY() + kepRef.offset_y - kepRef.ablakRef.h / 2, ss.getWidth(), ss.getHeight());
 		} else {
 			if (ss.getX() - kepRef.offset_x - kepRef.ablakRef.w / 2 < kepRef.ablakRef.w && ss.getY() - kepRef.offset_y + ss.getHeight() + kepRef.ablakRef.h / 2 > 0 && ss.getX() - kepRef.offset_x + ss.getWidth() + kepRef.ablakRef.h / 2 > 0
 					&& ss.getY() - kepRef.offset_y - kepRef.ablakRef.h / 2 < kepRef.ablakRef.h) {
 				batch.draw(tt, ss.getX() - kepRef.ablakRef.w / 2, ss.getY() - kepRef.ablakRef.w / 2, ss.getWidth(), ss.getHeight());
 			}
-		}
-		// batch.draw(tt, ss.getX(), ss.getY(), ss.getWidth(), ss.getHeight());
+		}*/
+		batch.draw(tt, ss.getX() + kepRef.offset_x - kepRef.ablakRef.w / 2, ss.getY() + kepRef.offset_y - kepRef.ablakRef.h / 2, ss.getWidth(), ss.getHeight());
+		//batch.draw(tt, ss.getX()-kepRef.w/2, ss.getY()-kepRef.h/2, ss.getWidth(), ss.getHeight());
 	}
 
 	/**
