@@ -2,14 +2,9 @@ package hu.funyirok.rpg_warrior;
 
 import java.util.Random;
 
-/**
- * Created by bRANC on 9/30/2015.
- */
+
 public class Warrior {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         Hero a= new Hero("Herooborn",30,10,0,10);
         Hero b= new Hero("Steve",40,20,0,11);
