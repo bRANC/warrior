@@ -30,6 +30,7 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 	public KepToltes kepernyotoltes;
 	public KepJatekter kepernyoJatekter;
 	public KepSugo KepernyoSugo;
+	public KepBekeres KepBekeres;
 
 	 public Thread kepernyoThread;
 
@@ -79,6 +80,7 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 		kepernyoMenu = new KepMenu(this);
 		kepernyoJatekter = new KepJatekter(this);
 		KepernyoSugo = new KepSugo(this);
+		KepBekeres= new KepBekeres(this);
 
 		kepernyo_csere(kepernyoMenu); // Men�vel kezd�nk
 
@@ -152,8 +154,13 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 	public void dispose() {
 		batch.dispose();
 		try {
-			kepernyoMenu.finalize(); // A teljes ablakokon kereszt�l sz�ntetek
-										// meg mindent.
+			KepBekeres.finalize(); // A teljes ablakokon kereszt�l sz�ntetek
+			// meg mindent.
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		try {
+			kepernyoMenu.finalize();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

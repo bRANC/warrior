@@ -81,7 +81,7 @@ public class KepToltes extends kepernyo_os_obj {
             ablakRef.kepernyoJatekter.jatekmenet_megszuntet();
             ablakRef.kepernyoJatekter = null;
             ablakRef.kepernyoJatekter = new KepJatekter(ablakRef);
-            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+            ablakRef.kepernyo_csere(ablakRef.KepBekeres);
         }
     }
 

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class KepJatekter extends kepernyo_os_obj {
 
@@ -54,15 +55,6 @@ public class KepJatekter extends kepernyo_os_obj {
 
 		bmpfBetu = new BitmapFont();
 		bmpfBetu.setColor(1, 1, 1, 1);
-		/*Skin skin=new Skin();
-		new Dialog("Some Dialog", "dialog") {
-			protected void result (Object object) {
-				System.out.println("Chosen: " + object);
-			}
-		}.text("Are you enjoying this demo?").button("Yes", true).button("No", false).key(Input.Keys.ENTER, true)
-				.key(Input.Keys.ESCAPE, false).show(this);*/
-
-
 	}
 
 	@Override
@@ -83,7 +75,7 @@ public class KepJatekter extends kepernyo_os_obj {
 		if (ablakRef.kepernyoMenu.main_menubol) {
 			ablakRef.kepernyoMenu.main_menubol = false;
 		}
-		}// ellenfelek mozgat�s �rt�k felt�ltve
+		}
 	public boolean tap(float x, float y, int count, int button) {
 
 		if (aKilep.benneVaneXY(x, y)) {
