@@ -1,14 +1,12 @@
 package hu.funyirok.rpg_warrior;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class KepToltes extends kepernyo_os_obj {
     protected Szoveg betuiras = new Szoveg(this);
 
 
-    alakzat aKilep, aHatter, jat2, jat3, jat4, jat5;
+    alakzat aVissza, aHatter, jat2, jat3, jat4, jat5;
     public boolean jat_2 = false, jat_3 = false, jat_4 = false, jat_5 = false, valasztva = false;
     public float betumeret = h / 40;
 
@@ -20,8 +18,8 @@ public class KepToltes extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_letrehoz() {
-        aKilep= new alakzat(this,"vissza.png",50,false);
-        aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
+        aVissza = new alakzat(this,"vissza.png",50,false);
+        aVissza.atHelyez(w- aVissza.getW()-betumeret,h- aVissza.getH()-betumeret);
         aHatter = new alakzat(this, "frame.png", 10, false);
 
 
@@ -48,7 +46,7 @@ public class KepToltes extends kepernyo_os_obj {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
 
-        aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
+        aVissza.atHelyez(w- aVissza.getW()-betumeret,h- aVissza.getH()-betumeret);
 
         jat2.atmeretez(w / 4, h / 10);
         jat2.atHelyez(w / 2 - jat2.getSzelesseg() - betumeret * 2, h / 2 + jat2.getH() / 2 + betumeret * 3);
@@ -73,7 +71,7 @@ public class KepToltes extends kepernyo_os_obj {
         jat3.rajzol(batch);
         jat4.rajzol(batch);
         jat5.rajzol(batch);
-        aKilep.rajzol(batch);
+        aVissza.rajzol(batch);
         //kiertekeles();
 
         if (valasztva) {
@@ -93,12 +91,15 @@ public class KepToltes extends kepernyo_os_obj {
         jat4.dispose();
         jat5.dispose();
         aHatter.dispose();
-        aKilep.dispose();
+        aVissza.dispose();
         //betuiras.dispose();
     }
 
     public boolean tap(float x, float y, int count, int button) {
 
+        if (aVissza.benneVaneXY(x, y)) {
+            ablakRef.kepernyo_csere(ablakRef.kepernyoMenu);
+        }
         if (jat2.benneVaneXY(x, y)) {
             jat_2 = true;
             valasztva = true;
@@ -117,23 +118,6 @@ public class KepToltes extends kepernyo_os_obj {
         }
         return false;
     }
-
-
-
-
-	/*public void kiertekeles() {
-
-		if (dev) System.out.println("�rt�kl�s bel�p�s");
-		
-		
-		if (ablakRef.kepernyoJatekter.nyertes) {
-
-		}
-		if (ablakRef.kepernyoJatekter.jatekos_ido_vege) {
-
-		}
-
-	}*/
 
 
 }

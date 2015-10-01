@@ -138,11 +138,9 @@ public class Szoveg {
     }
 
     public boolean erintve(float x__, float y__) {
-        if (hatter.benneVaneXY(x, y)) {
-            System.out.println("kattintva");
+        if (hatter.benneVaneXY(x__, y__)) {
             return true;
         } else {
-            System.out.println("nem kattintva");
             return false;
         }
 
