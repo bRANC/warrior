@@ -56,21 +56,21 @@ public abstract class kepernyo_os_obj implements Runnable {
 	 * le.
 	 */
 	public void jatekmenet_giroszkop_Jobbra(float mertek) {
-	};
+	}
 
 	/**
 	 * Akkor fut le, ha jobbra d�l a k�sz�l�k. Ha nincs giroszk�p, akkor nem fut
 	 * le.
 	 */
 	public void jatekmenet_giroszkop_Balra(float mertek) {
-	};
+	}
 
 	/**
 	 * Akkor fut le, ha jobbra d�l a k�sz�l�k. Ha nincs giroszk�p, akkor nem fut
 	 * le.
 	 */
 	public void jatekmenet_giroszkop_Fel(float mertek) {
-	};
+	}
 
 	/**
 	 * Akkor fut le, ha jobbra d�l a k�sz�l�k. Ha nincs giroszk�p, akkor nem fut
@@ -91,10 +91,7 @@ public abstract class kepernyo_os_obj implements Runnable {
 		return rnd.nextBoolean();
 	}
 
-	public static Float getRandomNumber(int ez) {
-		Float szam = (float) rnd.nextInt(ez);
-		return szam;
-	}
+
 
 	@Override
 	public final void run() {
@@ -102,8 +99,8 @@ public abstract class kepernyo_os_obj implements Runnable {
 			if (jatekmenet_halad)
 				jatekmenet_szal();
 			try {
-				//Thread.sleep(200); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
-				Thread.sleep(17); // 60 fps
+				Thread.sleep(200); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
+				//Thread.sleep(17); // 60 fps
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -180,7 +177,7 @@ public abstract class kepernyo_os_obj implements Runnable {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 
 		return false;
-	};
+	}
 
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
 		return false;
