@@ -4,19 +4,15 @@ package hu.funyirok.rpg_warrior;
 import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
 public class KepJatekter extends kepernyo_os_obj {
 
 	// http://sourceforge.net/projects/launch4j/files/launch4j-3/3.1.0-beta1/
 	public float betumeret=h/40;
 	protected Szoveg betuiras = new Szoveg(this);
-	alakzat aKilep, aHatter,  aNext;
+	alakzat aKilep, aHatter,  aNextgame;
 	alakzat aStart;
 
 	public Random r;
@@ -37,7 +33,8 @@ public class KepJatekter extends kepernyo_os_obj {
 		ablakRef.kepernyotoltes.lefutott = true;
 		betumeret=h/40;
 		aStart = new alakzat(this, "newgame.png", 400, false);
-		aNext = new alakzat(this, "nextgame.png", 400, false);
+		aNextgame = new alakzat(this, "nextgame.png", 400, false);
+
 
 ///		csapodas = Gdx.audio.newSound(Gdx.files.internal("becsapodas.mp3")); //a minta kedvéért
 
@@ -63,8 +60,8 @@ public class KepJatekter extends kepernyo_os_obj {
 		betumeret=h/40;
 		aKilep.atHelyez(w-aKilep.getW()-betumeret,h-aKilep.getH()-betumeret);
 
-		aNext.atmeretez(w / 4, h / 10);
-		aNext.atHelyez(w / 2 - aNext.getW() / 2, h / 2 - aNext.getH() - 100);
+		aNextgame.atmeretez(w / 4, h / 10);
+		aNextgame.atHelyez(w / 2 - aNextgame.getW() / 2, h / 2 - aNextgame.getH() - 100);
 		aStart.atmeretez(w / 4, h / 10);
 		aStart.atHelyez(w / 2 - aStart.getW() / 2, h / 2 - aStart.getH() - 100);
 
@@ -129,7 +126,7 @@ public class KepJatekter extends kepernyo_os_obj {
 			jatek_vege = true;
 			aHatter.rajzol(batch);
 
-			aNext.rajzol(batch);
+			aNextgame.rajzol(batch);
 		}
 		if (!jatek_vege) {
 			aKilep.rajzol(batch);
@@ -140,7 +137,7 @@ public class KepJatekter extends kepernyo_os_obj {
 	@Override
 	public void jatekmenet_megszuntet() {
 		aStart.dispose();
-		aNext.dispose();
+		aNextgame.dispose();
 		aKilep.dispose();
 
 		betuiras.dispose();

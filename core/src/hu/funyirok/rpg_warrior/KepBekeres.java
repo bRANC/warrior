@@ -10,11 +10,14 @@ public class KepBekeres extends kepernyo_os_obj {
     public float betumeret = h / 40;
     public String nev = "  ";
     public Szoveg nev_be;
-    public  alakzat aVissza;
+    public  alakzat aVissza,aNext;
 
     @Override
     public void jatekmenet_letrehoz() {
         betumeret = h / 40;
+        aNext = new alakzat(this, "Next_feherhat.png", 50, false);
+        aNext.atHelyez(betumeret,w-aNext.getSzelesseg()-betumeret);
+
         aVissza = new alakzat(this,"vissza.png",50,false);
         aVissza.atHelyez(w- aVissza.getW()-betumeret,h- aVissza.getH()-betumeret);
         nev = " ";
@@ -26,7 +29,7 @@ public class KepBekeres extends kepernyo_os_obj {
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
-
+        aNext.atHelyez(betumeret,w-aNext.getSzelesseg()-betumeret);
         aVissza.atHelyez(w - aVissza.getW() - betumeret, h - aVissza.getH() - betumeret);
     }
 
@@ -40,10 +43,14 @@ public class KepBekeres extends kepernyo_os_obj {
 
         nev_be.render_balra(batch);
         aVissza.rajzol(batch);
+        aNext.rajzol(batch);
     }
 
     @Override
     public boolean tap(float x, float y, int count, int button) {
+        if (aNext.benneVaneXY(x,y)){
+            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+        }
         if (aVissza.benneVaneXY(x,y)){
             ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
             ablakRef.kepernyotoltes.valasztva=false;
