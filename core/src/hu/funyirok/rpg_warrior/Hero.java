@@ -9,7 +9,7 @@ public class Hero {
     public Szoveg warrior;
     public String cselekves = "  ";
 
-    public double hp, mana, attack, defense, rd, def;
+    public double hp,e_hp, mana,e_mana, attack, defense, rd, def;
     public int hanyadik;
     public String nev;
     public boolean dead = false;
@@ -26,7 +26,9 @@ public class Hero {
         }
         nev = nev_;
         hp = hp_;
+        e_hp=hp_;
         mana = mana_;
+        e_mana=mana_;
         attack = attack_;
         defense = defense_;
 
