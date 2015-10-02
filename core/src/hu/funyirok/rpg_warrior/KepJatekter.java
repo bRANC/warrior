@@ -105,7 +105,6 @@ public class KepJatekter extends kepernyo_os_obj {
         if (jatekos_ido_vege) {
             jatek_vege = true;
             aHatter.rajzol(batch);
-
             aStart.rajzol(batch);
         }
         if (!jatek_vege) {
