@@ -27,10 +27,10 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 
 	public kepernyo_os_obj kepernyoFuto;
 	public KepMenu kepernyoMenu;
+	public KepBekeres KepBekeres;
 	public KepToltes kepernyotoltes;
 	public KepJatekter kepernyoJatekter;
 	public KepSugo KepernyoSugo;
-	public KepBekeres KepBekeres;
 
 	 public Thread kepernyoThread;
 
@@ -98,18 +98,6 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 
 	}
 
-	public void update(float mozdulX, float mozdulY) {
-		camera.update();
-		// System.out.println(mozdulX+" || "+mozdulY);
-		// System.out.println(aCursor.getX()+" poz "+ aCursor.getY());
-		aCursor.atHelyez(aCursor.getX() + mozdulX, aCursor.getY() + mozdulY);
-		// System.out.println(aCursor);
-		// aCursor.mozdul(mozdulX, mozdulY);
-	}
-
-	public void update() {
-		camera.update();
-	}
 
 	@Override
 	public void render() {
@@ -117,19 +105,19 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.setProjectionMatrix(camera.combined);
-		camera.rotate(1, 0, 0, 0);
+		//camera.rotate(1, 0, 0, 0);
 
 		/*camera.position.x = kepernyoFuto.offset_x;
 		camera.position.y = kepernyoFuto.offset_y;*/
-		camera.position.x = 0;
-		camera.position.y = 0;
+		//camera.position.x = 0;
+		//camera.position.y = 0;
 		// camera.position.z = ;
 
 		batch.begin();
 
 		kepernyoFuto.jatekmenet_render(batch);
 
-		// aCursor.rajzol(batch);
+//		aCursor.rajzol(batch);
 		batch.end();
 
 		// camera.update();

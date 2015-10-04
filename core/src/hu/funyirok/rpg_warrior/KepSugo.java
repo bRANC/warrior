@@ -51,7 +51,6 @@ public class KepSugo extends kepernyo_os_obj {
 
 	@Override
 	public void jatekmenet_render(SpriteBatch batch) {
-		ablakRef.update();
 		// itt ir ki
 		float betumeret = h / 40;
 		aMini.rajzol(batch);

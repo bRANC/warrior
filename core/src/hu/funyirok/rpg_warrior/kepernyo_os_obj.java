@@ -17,7 +17,7 @@ public abstract class kepernyo_os_obj implements Runnable {
 	private float giro_x = 0;
 	private float giro_y = 0;
 	private float giro_z = 0;
-
+public boolean elso_fut=true;
 	public boolean dev = false;
 
 	private static Random rnd = new Random();
@@ -47,8 +47,6 @@ public abstract class kepernyo_os_obj implements Runnable {
 	public void jatekmenet_atmeretez() {
 		w = Gdx.graphics.getWidth();
 		h = Gdx.graphics.getHeight();
-		ablakRef.update();
-		
 	}
 
 	/**
@@ -99,7 +97,11 @@ public abstract class kepernyo_os_obj implements Runnable {
 			if (jatekmenet_halad)
 				jatekmenet_szal();
 			try {
-				Thread.sleep(200); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
+				if (elso_fut){
+					Thread.sleep(17);
+				}else {
+					Thread.sleep(1500); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
+				}
 				//Thread.sleep(17); // 60 fps
 			} catch (InterruptedException e) {
 				e.printStackTrace();

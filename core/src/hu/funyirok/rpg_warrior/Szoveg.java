@@ -19,7 +19,6 @@ public class Szoveg {
     public boolean offset_engedelyezes = false;
 
 
-    //public labrintusgenerator labirintus;
 
     public Szoveg(kepernyo_os_obj j) {
         jatek = j;
@@ -27,12 +26,10 @@ public class Szoveg {
         for (int i = 0; i < 26; i++) {
             betuk[i] = new alakzat(jatek, "Karakterek/letter" + (char) (i + 65) + ".png", 20, false);
             betuk[i].mozgo_alakzat = false;
-            //System.out.println((char)(i+65));
         }
         for (int i = 26; i < 36; i++) {
             betuk[i] = new alakzat(jatek, "Karakterek/number" + (i - 26) + ".png", 20, false);
             betuk[i].mozgo_alakzat = false;
-            //System.out.println((i-26));
         }
         betuk[36] = new alakzat(jatek, "Karakterek/pont.png", 20, false);
         betuk[36].mozgo_alakzat = false;
@@ -176,7 +173,6 @@ public class Szoveg {
                 start = start + meretPX / 2;
             }
         }
-        hatter = new alakzat(jatek, "semmi_uj.png", 400, false);
         hatter.atHelyez(x, y);
         hatter.atmeretez(rajzolni[betuk_szama].getX() + rajzolni[betuk_szama].getSzelesseg() - rajzolni[0].getX(), meretPX);
     }

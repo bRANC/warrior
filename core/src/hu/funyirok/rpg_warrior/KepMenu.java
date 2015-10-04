@@ -110,7 +110,6 @@ public class KepMenu extends kepernyo_os_obj {
      */
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
-        ablakRef.update();
 //		aMini.rajzol(batch);
         aHatter.rajzol(batch);
 

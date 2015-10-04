@@ -105,14 +105,20 @@ public class KepToltes extends kepernyo_os_obj {
             valasztva = true;
         }
         if (jat3.benneVaneXY(x, y)) {
+            jat_2=true;
             jat_3 = true;
             valasztva = true;
         }
         if (jat4.benneVaneXY(x, y)) {
+            jat_2=true;
+            jat_3 = true;
             jat_4 = true;
             valasztva = true;
         }
         if (jat5.benneVaneXY(x, y)) {
+            jat_2=true;
+            jat_3 = true;
+            jat_4 = true;
             jat_5 = true;
             valasztva = true;
         }
