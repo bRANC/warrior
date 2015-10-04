@@ -83,7 +83,6 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 		KepBekeres= new KepBekeres(this);
 
 		kepernyo_csere(kepernyoMenu); // Men�vel kezd�nk
-
 	}
 
 	@Override

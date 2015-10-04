@@ -22,19 +22,20 @@ public class Hero {
     Hero(kepernyo_os_obj j, float h_, float w_, String nev_, double hp_, double mana_, double attack_, double defense_, int hanyadik) {
         h=h_;
         w=w_;
-        hp_ki = new Szoveg(j);
-        hp_ki.ini_render_balra(0,0,"",20);
         betumeret = h / 40;
+
+        hp_ki = new Szoveg(j);
         warrior = new Szoveg(j);
+        hp_ki.ini_render_balra(0,0,"",20);
+
         if (hanyadik == 0) {
-            warrior.ini_render_balra(w / 2 - betumeret * 25, (h / 2) + betumeret * 2, nev + cselekves, 20);
             big_face= new alakzat(j, "card_big_1.png", 400, false);
 
         }
         if (hanyadik == 1) {
-            warrior.ini_render_balra(w / 2 - betumeret * 25, (h / 2) - betumeret * 2, nev + cselekves, 20);
             big_face= new alakzat(j, "card_big_2.png", 400, false);
         }
+
         nev = nev_;
         hp = hp_;
         e_hp=hp_;
@@ -43,12 +44,16 @@ public class Hero {
         attack = attack_;
         defense = defense_;
         big_face.atmeretez(w/2,h);
+
+
+
+        warrior.ini_render_balra(0, 0, nev, 20);
     }
 
     public void render(SpriteBatch batch) {
        big_face.rajzol(batch);
-        warrior.render_balra(batch);
         hp_ki.render_balra(batch);
+        warrior.render_balra(batch);
     }
     public void atmeretez(){
         big_face.atmeretez(w/2,h);
@@ -63,8 +68,6 @@ public class Hero {
     }
 
     public void remHealth(double hp_) {
-        // cselekves=" lose health " + (int)hp_;
-        // warrior.szoveg_valtoztat(nev + cselekves);
         setHealth(getHealth() - hp_);
         if (getHealth()<0){
             hp=0;
@@ -76,8 +79,6 @@ public class Hero {
 
     public void HealthOut() {
         hp_ki.szoveg_valtoztat((int)e_hp+" : "+(int)hp);
-        cselekves = " Healt: " + (int)hp;
-        warrior.szoveg_valtoztat(nev + cselekves);
     }
 
     public double getHealth() {
@@ -110,18 +111,13 @@ public class Hero {
     public double attack(Hero kit) {
         rd = 0;
         int i = rnd.nextInt(2);
-        // System.out.println("At " + i);
 
         rd = attack * (1.0 + (1.15 - 1.0) * rnd.nextDouble());
         if (i == 1)
             useTSpell();
         if (!kit.dead) {
             kit.remHealth(rd);
-            cselekves = " attack " + kit.nev + " power: " + (int) rd;
-            warrior.szoveg_valtoztat(nev + cselekves);
         } else {
-            cselekves = " attack " + kit.nev + " dead: " + !dead;
-            warrior.szoveg_valtoztat(nev + cselekves);
         }
         return rd;
     }
@@ -138,12 +134,16 @@ public class Hero {
 
     }
     public void attack_ki_helyez(){
-        big_face.atHelyez(0,0);
-        hp_ki.hely_valtoztat(big_face.getX()+betumeret*3, big_face.getY()+betumeret*16);
+        big_face.atHelyez(0, 0);
+        at_helyezi_a_szoveget();
     }
     public void defense_ki_helyez(){
-        big_face.atHelyez(w/2,0);
-        hp_ki.hely_valtoztat(big_face.getX()+betumeret*3, big_face.getY()+betumeret*16);
+        big_face.atHelyez(w / 2, 0);
+        at_helyezi_a_szoveget();
+    }
+    public void at_helyezi_a_szoveget(){
+        hp_ki.hely_valtoztat(big_face.getX() + betumeret * 3, big_face.getY() + betumeret * 15 + betumeret/2);
+        warrior.hely_valtoztat(big_face.getX()+betumeret*3, h-hp_ki.hatter.getMagassag()-betumeret*3+betumeret/2);
     }
 
 

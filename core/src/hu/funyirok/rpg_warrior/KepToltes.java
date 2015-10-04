@@ -23,16 +23,16 @@ public class KepToltes extends kepernyo_os_obj {
         aHatter = new alakzat(this, "frame.png", 10, false);
 
 
-        jat2 = new alakzat(this, "res.png", 200, false);
+        jat2 = new alakzat(this, "player2.png", 200, false);
         jat2.atmeretez(w / 4, h / 10);
         jat2.atHelyez(w / 2 - jat2.getW() / 2, h / 2 - jat2.getH() / 2 + betumeret * 3);
-        jat3 = new alakzat(this, "coin.png", 200, false);
+        jat3 = new alakzat(this, "player3.png", 200, false);
         jat3.atmeretez(w / 4, h / 10);
         jat3.atHelyez(w / 2 - jat3.getW() / 2, h / 2 - jat3.getH() / 2 + betumeret * 3);
-        jat4 = new alakzat(this, "ikon.png", 200, false);
+        jat4 = new alakzat(this, "player4.png", 200, false);
         jat4.atmeretez(w / 4, h / 10);
         jat4.atHelyez(w / 2 - jat4.getW() / 2, h / 2 - jat4.getH() / 2 + betumeret * 3);
-        jat5 = new alakzat(this, "help.png", 200, false);
+        jat5 = new alakzat(this, "player5.png", 200, false);
         jat5.atmeretez(w / 4, h / 10);
         jat5.atHelyez(w / 2 - jat5.getW() / 2, h / 2 - jat5.getH() / 2 + betumeret * 3);
 

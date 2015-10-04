@@ -98,8 +98,7 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_render(SpriteBatch batch) {
 
         aHatter.rajzol(batch);
-
-            hos1.render(batch);
+         hos1.render(batch);
             hos2.render(batch);
 
         // fos.render(batch);
