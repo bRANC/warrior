@@ -76,6 +76,9 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_szal() {
         hos1.attack(hos2);
         hos2.HealthOut();
+        hos1.HealthOut();
+        hos1.attack_ki_helyez();
+        hos2.defense_ki_helyez();
         if (ablakRef.kepernyoMenu.main_menubol) {
             ablakRef.kepernyoMenu.main_menubol = false;
         }
@@ -118,7 +121,6 @@ public class KepJatekter extends kepernyo_os_obj {
         aStart.dispose();
         aNextgame.dispose();
         aKilep.dispose();
-
 //        betuiras.dispose();
         aHatter.dispose();
 

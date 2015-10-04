@@ -1,5 +1,6 @@
 package hu.funyirok.rpg_warrior;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.Random;
@@ -8,21 +9,31 @@ public class Hero {
     public float betumeret;
     public Szoveg warrior;
     public String cselekves = "  ";
+   // public Szoveg nev_be;
+    public Szoveg hp_ki;
+    public alakzat big_face;
 
     public double hp,e_hp, mana,e_mana, attack, defense, rd, def;
     public int hanyadik;
     public String nev;
     public boolean dead = false;
+    public float h,w;
 
-    Hero(kepernyo_os_obj j, float h, float w, String nev_, double hp_, double mana_, double attack_, double defense_, int hanyadik) {
-
+    Hero(kepernyo_os_obj j, float h_, float w_, String nev_, double hp_, double mana_, double attack_, double defense_, int hanyadik) {
+        h=h_;
+        w=w_;
+        hp_ki = new Szoveg(j);
+        hp_ki.ini_render_balra(0,0,"",20);
         betumeret = h / 40;
         warrior = new Szoveg(j);
         if (hanyadik == 0) {
             warrior.ini_render_balra(w / 2 - betumeret * 25, (h / 2) + betumeret * 2, nev + cselekves, 20);
+            big_face= new alakzat(j, "card_big_1.png", 400, false);
+
         }
         if (hanyadik == 1) {
             warrior.ini_render_balra(w / 2 - betumeret * 25, (h / 2) - betumeret * 2, nev + cselekves, 20);
+            big_face= new alakzat(j, "card_big_2.png", 400, false);
         }
         nev = nev_;
         hp = hp_;
@@ -31,12 +42,16 @@ public class Hero {
         e_mana=mana_;
         attack = attack_;
         defense = defense_;
-
-        System.out.println("valami");
+        big_face.atmeretez(w/2,h);
     }
 
     public void render(SpriteBatch batch) {
+       big_face.rajzol(batch);
         warrior.render_balra(batch);
+        hp_ki.render_balra(batch);
+    }
+    public void atmeretez(){
+        big_face.atmeretez(w/2,h);
     }
 
     Random rnd = new Random();
@@ -60,6 +75,7 @@ public class Hero {
     }
 
     public void HealthOut() {
+        hp_ki.szoveg_valtoztat((int)e_hp+" : "+(int)hp);
         cselekves = " Healt: " + (int)hp;
         warrior.szoveg_valtoztat(nev + cselekves);
     }
@@ -121,4 +137,15 @@ public class Hero {
         return def;
 
     }
+    public void attack_ki_helyez(){
+        big_face.atHelyez(0,0);
+        hp_ki.hely_valtoztat(big_face.getX()+betumeret*3, big_face.getY()+betumeret*16);
+    }
+    public void defense_ki_helyez(){
+        big_face.atHelyez(w/2,0);
+        hp_ki.hely_valtoztat(big_face.getX()+betumeret*3, big_face.getY()+betumeret*16);
+    }
+
+
+
 }
