@@ -47,7 +47,7 @@ public class Hero {
         big_face.atmeretez(w / 2, h);
 
 
-        warrior.ini_render_balra(0, 0, nev, 20);
+        warrior.ini_render_balra(0, 0, nev, szovegmeret);
     }
 
     public void render(SpriteBatch batch) {
