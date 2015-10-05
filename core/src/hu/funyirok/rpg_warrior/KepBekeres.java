@@ -47,6 +47,8 @@ public class KepBekeres extends kepernyo_os_obj {
     @Override
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
+        nev_be.hely_valtoztat(w / 2 - betumeret * 4, h / 2 + betumeret * 4);
+        hp_be.hely_valtoztat(nev_be.x, h / 2);
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
         aHatter.atmeretez(w, h);
@@ -143,9 +145,10 @@ public class KepBekeres extends kepernyo_os_obj {
 
     @Override
     public boolean keyTyped(char character) {
-        System.out.println(bevitel_szam);
+
         if (character==9){
             bevitel_szam++;
+            System.out.println(bevitel_szam);
         }
         if (bevitel_szam == 0) {
             if (nev.length() > 0) {

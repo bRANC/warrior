@@ -95,6 +95,7 @@ public class GdxAblak implements ApplicationListener, GestureListener, InputProc
 		kepernyoMenu.jatekmenet_atmeretez();
 		kepernyoJatekter.jatekmenet_atmeretez();
 		KepernyoSugo.jatekmenet_atmeretez();
+		KepBekeres.jatekmenet_atmeretez();
 
 	}
 
