@@ -92,7 +92,6 @@ public class KepToltes extends kepernyo_os_obj {
         jat5.dispose();
         aHatter.dispose();
         aVissza.dispose();
-        //betuiras.dispose();
     }
 
     public boolean tap(float x, float y, int count, int button) {

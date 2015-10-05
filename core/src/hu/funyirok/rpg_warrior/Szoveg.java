@@ -82,6 +82,9 @@ public class Szoveg {
         x = x_;
         y = y_;
     }
+    public void meretez(float x_){
+        meretPX=x_;
+    }
 
     public void render_balra(SpriteBatch batch) {
 

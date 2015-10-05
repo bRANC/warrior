@@ -72,14 +72,14 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
-        hos1.atmeretez();
-        hos2.atmeretez();
+        hos1.atmeretez(h,w);
+        hos2.atmeretez(h,w);
         if (ablakRef.kepernyotoltes.jat_3) {
-            hos3.atmeretez();
+            hos3.atmeretez(h,w);
             if (ablakRef.kepernyotoltes.jat_4) {
-                hos4.atmeretez();
+                hos4.atmeretez(h,w);
                 if (ablakRef.kepernyotoltes.jat_5) {
-                    hos5.atmeretez();
+                    hos5.atmeretez(h,w);
                 }
             }
         }

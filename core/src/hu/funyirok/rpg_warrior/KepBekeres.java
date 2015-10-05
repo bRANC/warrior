@@ -40,19 +40,19 @@ public class KepBekeres extends kepernyo_os_obj {
         defense = " ";
 
         nev_be = new Szoveg(this);
-        nev_be.ini_render_balra(w / 2 - betumeret * 8, h / 2 + betumeret * 12, "Nev:" + nev, szovegmeret);
+        nev_be.ini_render_balra(betumeret * 23, h / 2 + betumeret * 12, "Nev:" + nev, szovegmeret);
 
         hp_be = new Szoveg(this);
-        hp_be.ini_render_balra(nev_be.x, h / 2 + betumeret *8 , "HP:" + hp + "(10-500)", szovegmeret);
+        hp_be.ini_render_balra(betumeret*8, h / 2 + betumeret *8 , "HP:" + hp + "(10-500)", szovegmeret);
 
         mana_be = new Szoveg(this);
-        mana_be.ini_render_balra(nev_be.x, h / 2, "Mana:" + mana + " (0-20)", szovegmeret);
+        mana_be.ini_render_balra(betumeret*8, h / 2, "Mana:" + mana + " (0-20)", szovegmeret);
 
         attack_be = new Szoveg(this);
-        attack_be.ini_render_balra(nev_be.x, h / 2 - betumeret * 4, "Attack:" + attack + " (1-10)", szovegmeret);
+        attack_be.ini_render_balra(betumeret*30, h / 2 + betumeret * 8 , "Attack:" + attack + " (1-10)", szovegmeret);
 
         defense_be = new Szoveg(this);
-        defense_be.ini_render_balra(nev_be.x, h / 2 - betumeret * 8, "Defense:" + defense + "  (1-10)", szovegmeret);
+        defense_be.ini_render_balra(betumeret*30, h / 2, "Defense:" + defense + "  (1-10)", szovegmeret);
 
         hiba_ki = new Szoveg(this);
         hiba_ki.ini_render_balra(betumeret / 2, h / 2, "Error:" + Hibauzenet, szovegmeret);
@@ -61,10 +61,15 @@ public class KepBekeres extends kepernyo_os_obj {
     @Override
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
-        nev_be.hely_valtoztat(w / 2 - betumeret * 4, h / 2 + betumeret * 4);
-        hp_be.hely_valtoztat(nev_be.x, h / 2);
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
+
+        nev_be.hely_valtoztat(betumeret * 23, h / 2 + betumeret * 12);
+        hp_be.hely_valtoztat(betumeret*8, h / 2 + betumeret *8 );
+        mana_be.hely_valtoztat(betumeret*8, h / 2);
+        attack_be.hely_valtoztat(betumeret*30, h / 2 + betumeret * 8);
+        defense_be.hely_valtoztat(betumeret*30, h / 2);
+
         aHatter.atmeretez(w, h);
         aNext.atHelyez(w - aNext.getSzelesseg() - betumeret, betumeret);
         aVissza.atHelyez(w - aVissza.getW() - betumeret, h - aVissza.getH() - betumeret);
@@ -91,115 +96,94 @@ public class KepBekeres extends kepernyo_os_obj {
         aNext.rajzol(batch);
     }
 
+    public void next_tap_mentes(){
+        if (!hiba) {
+            bevitel_szam=0;
+            if (ablakRef.kepernyotoltes.jat_2) {
+                System.out.println(jatekosok);
+                if (jatekosok == 0) {
+                    hos1 = nev;
+                    hos1_hp = Double.parseDouble(hp);
+                    hos1_mana = Double.parseDouble(mana);
+                    hos1_attack = Double.parseDouble(attack);
+                    hos1_defense = Double.parseDouble(defense);
+                } else if (jatekosok == 1) {
+                    hos2 = nev;
+                    hos2_hp = Double.parseDouble(hp);
+                    hos2_mana = Double.parseDouble(mana);
+                    hos2_attack = Double.parseDouble(attack);
+                    hos2_defense = Double.parseDouble(defense);
+
+                    if (!ablakRef.kepernyotoltes.jat_3) {
+                        bekerve = true;
+                        ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+                    }
+                }
+            }
+            if (ablakRef.kepernyotoltes.jat_3) {
+                if (jatekosok == 2) {
+                    hos3 = nev;
+                    hos3_hp = Double.parseDouble(hp);
+                    hos3_mana = Double.parseDouble(mana);
+                    hos3_attack = Double.parseDouble(attack);
+                    hos3_defense = Double.parseDouble(defense);
+
+                    if (!ablakRef.kepernyotoltes.jat_4) {
+                        bekerve = true;
+                        ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+                    }
+                }
+
+            }
+            if (ablakRef.kepernyotoltes.jat_4) {
+                if (jatekosok == 3) {
+                    hos4 = nev;
+                    hos4_hp = Double.parseDouble(hp);
+                    hos4_mana = Double.parseDouble(mana);
+                    hos4_attack = Double.parseDouble(attack);
+                    hos4_defense = Double.parseDouble(defense);
+
+                    if (!ablakRef.kepernyotoltes.jat_5) {
+                        bekerve = true;
+                        ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
+                    }
+                }
+
+            }
+            if (ablakRef.kepernyotoltes.jat_5) {
+                if (jatekosok == 4) {
+                    hos5 = nev;
+                    hos5_hp = Double.parseDouble(hp);
+                    hos5_mana = Double.parseDouble(mana);
+                    hos5_attack = Double.parseDouble(attack);
+                    hos5_defense = Double.parseDouble(defense);
+
+                }
+            }
+            jatekosok++;
+        } else {
+            Hibauzenet = " ";
+            hiba = false;
+            hiba_ki.szoveg_valtoztat(Hibauzenet);
+
+        }
+        nev = " ";
+        hp = " ";
+        mana = " ";
+        attack = " ";
+        defense = " ";
+        nev_be.szoveg_valtoztat("nev:" + nev);
+        hp_be.szoveg_valtoztat("HP:" + hp + " (10-500)");
+        mana_be.szoveg_valtoztat("Mana:" + mana + " (0-20)");
+        attack_be.szoveg_valtoztat("Attack:" + attack + " (1-10)");
+        defense_be.szoveg_valtoztat("Defense:" + defense + " (1-10)");
+    }
+
+
     @Override
     public boolean tap(float x, float y, int count, int button) {
         if (aNext.benneVaneXY(x, y)) {
-            if (!hiba) {
-                bevitel_szam = 0;
-                if (ablakRef.kepernyotoltes.jat_2) {
-                    System.out.println(jatekosok);
-                    if (jatekosok == 0) {
-                        hos1 = nev;
-                        hos1_hp = Double.parseDouble(hp);
-                        hos1_mana = Double.parseDouble(mana);
-                        hos1_attack = Double.parseDouble(attack);
-                        hos1_defense = Double.parseDouble(defense);
-
-                        attack = " ";
-                        defense = " ";
-                        nev = " ";
-                        hp = " ";
-                        mana = " ";
-                    } else if (jatekosok == 1) {
-                        hos2 = nev;
-                        hos2_hp = Double.parseDouble(hp);
-                        hos2_mana = Double.parseDouble(mana);
-                        hos2_attack = Double.parseDouble(attack);
-                        hos2_defense = Double.parseDouble(defense);
-
-                        attack = " ";
-                        defense = " ";
-                        nev = " ";
-                        hp = " ";
-                        mana = " ";
-                        if (!ablakRef.kepernyotoltes.jat_3) {
-                            bekerve = true;
-                            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
-                        }
-                    }
-                }
-                if (ablakRef.kepernyotoltes.jat_3) {
-                    if (jatekosok == 2) {
-                        hos3 = nev;
-                        hos3_hp = Double.parseDouble(hp);
-                        hos3_mana = Double.parseDouble(mana);
-                        hos3_attack = Double.parseDouble(attack);
-                        hos3_defense = Double.parseDouble(defense);
-
-                        attack = " ";
-                        defense = " ";
-                        nev = " ";
-                        hp = " ";
-                        mana = " ";
-                        if (!ablakRef.kepernyotoltes.jat_4) {
-                            bekerve = true;
-                            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
-                        }
-                    }
-
-                }
-                if (ablakRef.kepernyotoltes.jat_4) {
-                    if (jatekosok == 3) {
-                        hos4 = nev;
-                        hos4_hp = Double.parseDouble(hp);
-                        hos4_mana = Double.parseDouble(mana);
-                        hos4_attack = Double.parseDouble(attack);
-                        hos4_defense = Double.parseDouble(defense);
-
-                        attack = " ";
-                        defense = " ";
-                        nev = " ";
-                        hp = " ";
-                        mana = " ";
-                        if (!ablakRef.kepernyotoltes.jat_5) {
-                            bekerve = true;
-                            ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
-                        }
-                    }
-
-                }
-                if (ablakRef.kepernyotoltes.jat_5) {
-                    if (jatekosok == 4) {
-                        hos5 = nev;
-                        hos5_hp = Double.parseDouble(hp);
-                        hos5_mana = Double.parseDouble(mana);
-                        hos5_attack = Double.parseDouble(attack);
-                        hos5_defense = Double.parseDouble(defense);
-
-                        attack = " ";
-                        defense = " ";
-                        nev = " ";
-                        hp = " ";
-                        mana = " ";
-                    }
-                }
-                jatekosok++;
-            } else {
-                Hibauzenet = " ";
-                hiba = false;
-                hiba_ki.szoveg_valtoztat(Hibauzenet);
-                bevitel_szam = 0;
-                nev = " ";
-                hp = " ";
-                mana = " ";
-                attack = " ";
-                defense = " ";
-            }
-            nev_be.szoveg_valtoztat("nev:" + nev);
-            hp_be.szoveg_valtoztat("HP:" + hp + " (10-500)");
-            mana_be.szoveg_valtoztat("Mana:" + mana + " (0-20)");
-            attack_be.szoveg_valtoztat("Attack:" + attack + " (1-10)");
-            defense_be.szoveg_valtoztat("Defense:" + defense + " (1-10)");
+            validalas();
         }
         if (aVissza.benneVaneXY(x, y)) {
             ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
@@ -212,31 +196,22 @@ public class KepBekeres extends kepernyo_os_obj {
         if (nev_be.erintve(x, y)) {
             bevitel_szam = 0;
             Gdx.input.setOnscreenKeyboardVisible(true);
-        } else {
-            //Gdx.input.setOnscreenKeyboardVisible(false);
         }
         if (hp_be.erintve(x, y)) {
             bevitel_szam = 1;
             Gdx.input.setOnscreenKeyboardVisible(true);
-        } else {
-            //Gdx.input.setOnscreenKeyboardVisible(false);
         }
         if (mana_be.erintve(x, y)) {
             bevitel_szam = 2;
             Gdx.input.setOnscreenKeyboardVisible(true);
-        } else {
-
         }
         if (attack_be.erintve(x, y)) {
             bevitel_szam = 3;
             Gdx.input.setOnscreenKeyboardVisible(true);
-        } else {
-
         }
         if (defense_be.erintve(x, y)) {
             bevitel_szam = 4;
             Gdx.input.setOnscreenKeyboardVisible(true);
-        } else {
         }
         return false;
     }
@@ -245,10 +220,9 @@ public class KepBekeres extends kepernyo_os_obj {
     public boolean keyTyped(char character) {
         System.out.println("karakter: " + (int) character);
         if (!hiba) {
-            System.out.println((int) character);
-            if (character == 8 || character == 9 || character == 13) {
+            if (/*character == 8 ||*/ character == 9 || character == 13) {//androidon a 8-as az enter gépen viszont a backspace
                 bevitel_szam++;
-                System.out.println(bevitel_szam);
+                System.out.println("bekérés: "+bevitel_szam);
             }
             if (bevitel_szam == 0) {
                 if (nev.length() > 0) {
@@ -332,29 +306,21 @@ public class KepBekeres extends kepernyo_os_obj {
     public void validalas() {
         try {
             if (Integer.parseInt(hp.trim()) >= 10 && Integer.parseInt(hp.trim()) <= 500) {
-                System.out.println(hp);
-                System.out.println("jó lesz a hp");
             } else {
                 Hibauzenet += "HP, ";
                 hiba = true;
             }
             if (Integer.parseInt(mana.trim()) >= 0 && Integer.parseInt(mana.trim()) <= 20) {
-                System.out.println(mana);
-                System.out.println("jó lesz a mana");
             } else {
                 Hibauzenet += "Mana, ";
                 hiba = true;
             }
             if (Integer.parseInt(attack.trim()) >= 1 && Integer.parseInt(attack.trim()) <= 10) {
-                System.out.println(attack);
-                System.out.println("jó lesz az attack");
             } else {
                 Hibauzenet += "Attack, ";
                 hiba = true;
             }
             if (Integer.parseInt(defense.trim()) >= 1 && Integer.parseInt(defense.trim()) <= 10) {
-                System.out.println(defense);
-                System.out.println("jó lesz a defense");
             } else {
                 Hibauzenet += "Defense, ";
                 hiba = true;
@@ -370,8 +336,8 @@ public class KepBekeres extends kepernyo_os_obj {
         } else {
             Hibauzenet += "is out of expection";
             hiba_ki.szoveg_valtoztat(Hibauzenet);
-            bevitel_szam = 0;
         }
+        next_tap_mentes();
     }
 
     @Override

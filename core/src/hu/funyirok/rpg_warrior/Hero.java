@@ -8,9 +8,11 @@ import java.util.Random;
 public class Hero {
     public float betumeret,szovegmeret;
     public Szoveg warrior;
+    public Szoveg hp_ki;
+
     public String cselekves = "  ";
     // public Szoveg nev_be;
-    public Szoveg hp_ki;
+
     public alakzat big_face;
 
     public double hp, e_hp, mana, e_mana, attack, defense, rd, def;
@@ -20,6 +22,8 @@ public class Hero {
     public float h, w;
 
     Hero(kepernyo_os_obj j, float h_, float w_, String nev_, double hp_, double mana_, double attack_, double defense_, int hanyadik) {
+
+
         h = h_;
         w = w_;
         betumeret = h / 40;
@@ -56,9 +60,14 @@ public class Hero {
         warrior.render_balra(batch);
     }
 
-    public void atmeretez() {
+    public void atmeretez(float h_,float w_) {
+        h = h_;
+        w = w_;
+        betumeret = h / 40;
         szovegmeret = betumeret*2-5;
         big_face.atmeretez(w / 2, h);
+        warrior.meretez(szovegmeret);
+        hp_ki.meretez(szovegmeret);
     }
 
     Random rnd = new Random();
@@ -112,30 +121,37 @@ public class Hero {
 
     public double attack(Hero kit) {
         rd = 0;
-        int i = rnd.nextInt(2);
+
 
         rd = attack * (1.0 + (1.15 - 1.0) * rnd.nextDouble());
-        if (i == 1)
+        if ( rnd.nextBoolean())
             useTSpell();
         if (!kit.dead) {
             kit.remHealth(rd);
-        } else {
         }
         return rd;
     }
 
     public double defense() {
-        int i = rnd.nextInt(2);
-        System.out.println("Def " + i);
+
         def = 0;
         def = defense * (0.5 + (1.3 - 0.5) * rnd.nextDouble());
 
-        if (i == 1)
+        if (rnd.nextBoolean())
             useDSpell();
         return def;
 
     }
 
+    public  void varakoz_1(){
+
+    }
+    public  void varakoz_2(){
+
+    }
+    public  void varakoz_3(){
+
+    }
     public void attack_ki_helyez() {
         big_face.atmeretez(w / 2, h);
         big_face.atHelyez(0, 0);
