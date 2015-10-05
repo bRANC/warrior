@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Szoveg {
     public kepernyo_os_obj jatek;
-    public alakzat betuk[] = new alakzat[39];//abcdefghijklmnopqrstxyz0123456789.,:
+    public alakzat betuk[] = new alakzat[42];//abcdefghijklmnopqrstxyz0123456789.,:
     public alakzat rajzolni[] = new alakzat[100];
     public int betu_index_hivatkozas[];
     public int betuk_szama = 0;
@@ -37,6 +37,13 @@ public class Szoveg {
         betuk[37].mozgo_alakzat = false;
         betuk[38] = new alakzat(jatek, "Karakterek/kettospont.png", 20, false);
         betuk[38].mozgo_alakzat = false;
+        betuk[39] = new alakzat(jatek, "Karakterek/zaro1.png", 20, false);
+        betuk[39].mozgo_alakzat = false;
+        betuk[40] = new alakzat(jatek, "Karakterek/zaro2.png", 20, false);
+        betuk[40].mozgo_alakzat = false;
+        betuk[41] = new alakzat(jatek, "Karakterek/kotojel.png", 20, false);
+        betuk[41].mozgo_alakzat = false;
+
 
     }
 
@@ -51,6 +58,9 @@ public class Szoveg {
         if (c == 46) index = 36;
         if (c == 44) index = 37;
         if (c == 58) index = 38;
+        if (c == 40) index = 39;
+        if (c == 41) index = 40;
+        if (c == 45) index = 41;
         return index;
     }
 
