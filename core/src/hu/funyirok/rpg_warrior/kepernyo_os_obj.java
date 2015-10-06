@@ -20,7 +20,7 @@ public abstract class kepernyo_os_obj implements Runnable {
 public boolean elso_fut=true;
 	public boolean dev = false;
 
-	private static Random rnd = new Random();
+	public static Random rnd = new Random();
 	private boolean jatekmenet_halad = false;
 	public boolean fut = true;
 

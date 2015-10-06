@@ -36,17 +36,17 @@ public class KepJatekter extends kepernyo_os_obj {
         hos2 = new Hero(this, h, w, "Peti", 500, 10, 20, 10, 1);
   */
 
-            hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
-            hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
-            if (ablakRef.kepernyotoltes.jat_3) {
-                hos3 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 2);
+        hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
+        hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
+        if (ablakRef.kepernyotoltes.jat_3) {
+            hos3 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 2);
+        }
+        if (ablakRef.kepernyotoltes.jat_4) {
+            hos4 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 3);
+            if (ablakRef.kepernyotoltes.jat_5) {
+                hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
             }
-            if (ablakRef.kepernyotoltes.jat_4) {
-                hos4 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 3);
-                if (ablakRef.kepernyotoltes.jat_5) {
-                    hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
-                }
-            }
+        }
 
 
         ablakRef.kepernyotoltes.lefutott = true;
@@ -72,14 +72,14 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
-        hos1.atmeretez(h,w);
-        hos2.atmeretez(h,w);
+        hos1.atmeretez(h, w);
+        hos2.atmeretez(h, w);
         if (ablakRef.kepernyotoltes.jat_3) {
-            hos3.atmeretez(h,w);
+            hos3.atmeretez(h, w);
             if (ablakRef.kepernyotoltes.jat_4) {
-                hos4.atmeretez(h,w);
+                hos4.atmeretez(h, w);
                 if (ablakRef.kepernyotoltes.jat_5) {
-                    hos5.atmeretez(h,w);
+                    hos5.atmeretez(h, w);
                 }
             }
         }
@@ -96,17 +96,118 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_szal() {
         hos1.attack_ki_helyez();
         hos2.defense_ki_helyez();
-        hos1.attack(hos2);
-        hos2.HealthOut();
-        hos1.HealthOut();
-        if (ablakRef.kepernyoMenu.main_menubol) {
+
+
+        if (ablakRef.kepernyoMenu.main_menubol)
+
+        {
             ablakRef.kepernyoMenu.main_menubol = false;
         }
-        if (lassitas > 10) {
+
+        if (lassitas > 10)
+
+        {
             elso_fut = false;
-        } else {
+        } else
+
+        {
             lassitas++;
         }
+
+    }
+
+
+    public void hos_tamad_5(Hero tamado) {
+        tamado.attack_ki_helyez();
+        double tamads_ertek;
+        if (rnd.nextBoolean()) {
+            tamads_ertek = tamado.attack(hos2);
+            if (tamads_ertek == 0) {
+                tamads_ertek = tamado.attack(hos3);
+                if (tamads_ertek == 0) {
+                    tamads_ertek = tamado.attack(hos4);
+                    if (tamads_ertek == 0) {
+                        tamads_ertek = tamado.attack(hos5);
+                        if (tamads_ertek == 0) {
+                            tamado.nyert = true;
+                        } else {
+                            hos5.defense_ki_helyez();
+                        }
+                    } else {
+                        hos4.defense_ki_helyez();
+                    }
+                } else {
+                    hos3.defense_ki_helyez();
+                }
+            } else {
+                hos2.defense_ki_helyez();
+            }
+        } else if (rnd.nextBoolean()) {
+            tamads_ertek = tamado.attack(hos5);
+            if (tamads_ertek == 0) {
+                tamads_ertek = tamado.attack(hos4);
+                if (tamads_ertek == 0) {
+                    tamads_ertek = tamado.attack(hos2);
+                    if (tamads_ertek == 0) {
+                        tamads_ertek = tamado.attack(hos3);
+                        if (tamads_ertek == 0) {
+                            tamado.nyert = true;
+                        } else {
+                            hos3.defense_ki_helyez();
+                        }
+                    } else {
+                        hos2.defense_ki_helyez();
+                    }
+                } else {
+                    hos4.defense_ki_helyez();
+                }
+            } else {
+                hos5.defense_ki_helyez();
+            }
+        } else if (rnd.nextBoolean()) {
+            tamads_ertek = tamado.attack(hos4);
+            if (tamads_ertek == 0) {
+                tamads_ertek = tamado.attack(hos5);
+                if (tamads_ertek == 0) {
+                    tamads_ertek = tamado.attack(hos3);
+                    if (tamads_ertek == 0) {
+                        tamads_ertek = tamado.attack(hos2);
+                        if (tamads_ertek == 0) {
+                            tamado.nyert = true;
+                        } else {
+                            hos2.defense_ki_helyez();
+                        }
+                    } else {
+                        hos3.defense_ki_helyez();
+                    }
+                } else {
+                    hos5.defense_ki_helyez();
+                }
+            } else {
+                hos4.defense_ki_helyez();
+            }
+        }
+        if (!hos2.dead ) {
+            if (hos2.defense_helyez) {
+
+            }
+        }
+        if (!hos3.dead) {
+            if (hos3.defense_helyez) {
+
+            }
+        }
+        if (!hos4.dead) {
+            if (hos4.defense_helyez) {
+
+            }
+        }
+        if (!hos5.dead) {
+            if (hos5.defense_helyez) {
+
+            }
+        }
+
     }
 
     public boolean tap(float x, float y, int count, int button) {
@@ -121,11 +222,25 @@ public class KepJatekter extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
-        if (ablakRef.KepBekeres.bekerve){
+       /* if (ablakRef.KepBekeres.bekerve){
             hos1 = new Hero(this, h, w, ablakRef.KepBekeres.hos1, ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 0);
             hos2 = new Hero(this, h, w, ablakRef.KepBekeres.hos2, ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 1);
             if (ablakRef.kepernyotoltes.jat_3) {
                 hos3 = new Hero(this, h, w, ablakRef.KepBekeres.hos3, ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 2);
+                if (ablakRef.kepernyotoltes.jat_4) {
+                    hos4 = new Hero(this, h, w, ablakRef.KepBekeres.hos4, ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 3);
+                    if (ablakRef.kepernyotoltes.jat_5) {
+                        hos5 = new Hero(this, h, w, ablakRef.KepBekeres.hos5, ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, 4);
+                    }
+                }
+            }
+            ablakRef.KepBekeres.bekerve = false;
+        }*/
+        if (ablakRef.KepBekeres.bekerve) {
+            hos1 = new Hero(this, h, w, "Eggyik", ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 0);
+            hos2 = new Hero(this, h, w, "Masik", ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 1);
+            if (ablakRef.kepernyotoltes.jat_3) {
+                hos3 = new Hero(this, h, w, "Megegy", ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 2);
                 if (ablakRef.kepernyotoltes.jat_4) {
                     hos4 = new Hero(this, h, w, ablakRef.KepBekeres.hos4, ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 3);
                     if (ablakRef.kepernyotoltes.jat_5) {

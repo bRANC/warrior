@@ -39,6 +39,14 @@ public class KepBekeres extends kepernyo_os_obj {
         attack = " ";
         defense = " ";
 
+        nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
+        hp = " 500";
+        mana = " 20";
+        attack = " 10";
+        defense = " 10";
+
+
+
         nev_be = new Szoveg(this);
         nev_be.ini_render_balra(betumeret * 23, h / 2 + betumeret * 12, "Nev:" + nev, szovegmeret);
 
@@ -167,11 +175,18 @@ public class KepBekeres extends kepernyo_os_obj {
             hiba_ki.szoveg_valtoztat(Hibauzenet);
 
         }
+        nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
+        hp = " 500";
+        mana = " 20";
+        attack = " 10";
+        defense = " 10";
+        /*
         nev = " ";
         hp = " ";
         mana = " ";
         attack = " ";
         defense = " ";
+        */
         nev_be.szoveg_valtoztat("nev:" + nev);
         hp_be.szoveg_valtoztat("HP:" + hp + " (10-500)");
         mana_be.szoveg_valtoztat("Mana:" + mana + " (0-20)");
