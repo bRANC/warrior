@@ -107,103 +107,78 @@ public class KepJatekter extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_szal() {
-        if (tamadhatnak) {
-            if (!tamadot) {/*
-                if (hos1.defense_helyez) {
+        if (!jatek_vege) {
+            if (tamadhatnak) {
+                if (!tamadot) {
                     hos1.kiteszi_big();
-                    System.out.println("hos1");
-                }
-                if (hos2.defense_helyez) {
                     hos2.kiteszi_big();
-                    System.out.println("hos2");
-                }
-                if (hos3.defense_helyez) {
                     hos3.kiteszi_big();
-                    System.out.println("hos3");
-                }
-                if (hos4.defense_helyez) {
                     hos4.kiteszi_big();
-                    System.out.println("hos4");
-                }
-                if (hos5.defense_helyez) {
                     hos5.kiteszi_big();
-                    System.out.println("hos5");
                 }
-                if (tamadot_1) {
-                    hos_tamad.kiteszi_big();
-                } else {
-                    hos_tamad_prev.kiteszi_big();
-                }*/
-                hos1.kiteszi_big();
-                hos2.kiteszi_big();
-                hos3.kiteszi_big();
-                hos4.kiteszi_big();
-                hos5.kiteszi_big();
-            }
-            if (ablakRef.kepernyotoltes.jat_2) {
-                if (tamadot) {
-                    hos_tamad = hos_tamad_2(hos1);
-                    System.out.println(hos_tamad);
-                } else {
-                    if (tamadot_1) {
-                        tamadot_1 = false;
-                        System.out.println(hos_tamad_prev);
-                        hos_tamad_prev = hos_tamad_2(hos_tamad);
-                    } else {
-                        tamadot_1 = true;
+                if (ablakRef.kepernyotoltes.jat_2) {
+                    if (tamadot) {
+                        hos_tamad = hos_tamad_2(hos1);
                         System.out.println(hos_tamad);
-                        hos_tamad = hos_tamad_2(hos_tamad_prev);
-                    }
-                }
-
-            }
-            if (ablakRef.kepernyotoltes.jat_3) {
-                if (tamadot) {
-                    hos_tamad = hos_tamad_3(hos1);
-                } else {
-                    if (tamadot_1) {
-                        tamadot_1 = false;
-                        hos_tamad_prev = hos_tamad_3(hos_tamad);
                     } else {
-                        tamadot_1 = true;
-                        hos_tamad = hos_tamad_3(hos_tamad_prev);
+                        if (tamadot_1) {
+                            tamadot_1 = false;
+                            System.out.println(hos_tamad_prev);
+                            hos_tamad_prev = hos_tamad_2(hos_tamad);
+                        } else {
+                            tamadot_1 = true;
+                            System.out.println(hos_tamad);
+                            hos_tamad = hos_tamad_2(hos_tamad_prev);
+                        }
                     }
+
                 }
-
-            }
-            if (ablakRef.kepernyotoltes.jat_4) {
-                if (tamadot) {
-                    hos_tamad = hos_tamad_4(hos1);
-                } else {
-                    if (tamadot_1) {
-                        tamadot_1 = false;
-                        hos_tamad_prev = hos_tamad_4(hos_tamad);
+                if (ablakRef.kepernyotoltes.jat_3) {
+                    if (tamadot) {
+                        hos_tamad = hos_tamad_3(hos1);
                     } else {
-                        tamadot_1 = true;
-                        hos_tamad = hos_tamad_4(hos_tamad_prev);
-
+                        if (tamadot_1) {
+                            tamadot_1 = false;
+                            hos_tamad_prev = hos_tamad_3(hos_tamad);
+                        } else {
+                            tamadot_1 = true;
+                            hos_tamad = hos_tamad_3(hos_tamad_prev);
+                        }
                     }
+
                 }
-
-            }
-            if (ablakRef.kepernyotoltes.jat_5) {
-
-                if (tamadot) {
-                    hos_tamad = hos_tamad_5(hos1);
-                } else {
-
-                    if (tamadot_1) {
-                        tamadot_1 = false;
-                        hos_tamad_prev = hos_tamad_5(hos_tamad);
+                if (ablakRef.kepernyotoltes.jat_4) {
+                    if (tamadot) {
+                        hos_tamad = hos_tamad_4(hos1);
                     } else {
-                        tamadot_1 = true;
-                        hos_tamad = hos_tamad_5(hos_tamad_prev);
+                        if (tamadot_1) {
+                            tamadot_1 = false;
+                            hos_tamad_prev = hos_tamad_4(hos_tamad);
+                        } else {
+                            tamadot_1 = true;
+                            hos_tamad = hos_tamad_4(hos_tamad_prev);
+
+                        }
+                    }
+
+                }
+                if (ablakRef.kepernyotoltes.jat_5) {
+
+                    if (tamadot) {
+                        hos_tamad = hos_tamad_5(hos1);
+                    } else {
+
+                        if (tamadot_1) {
+                            tamadot_1 = false;
+                            hos_tamad_prev = hos_tamad_5(hos_tamad);
+                        } else {
+                            tamadot_1 = true;
+                            hos_tamad = hos_tamad_5(hos_tamad_prev);
+                        }
                     }
                 }
             }
         }
-
-
         if (ablakRef.kepernyoMenu.main_menubol)
 
         {
@@ -506,6 +481,9 @@ public class KepJatekter extends kepernyo_os_obj {
         }
         if (hos4.dead){
             i++;
+        }
+        if (i==3){
+
         }
         tamadot = false;
         if (hos1_ved) {
