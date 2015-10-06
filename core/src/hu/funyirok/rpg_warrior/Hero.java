@@ -8,7 +8,7 @@ import java.util.Random;
 public class Hero {
     public float betumeret, szovegmeret;
     public Szoveg warrior;
-    public Szoveg hp_ki;
+    public Szoveg hp_ki, mana_ki, att_ki, def_ki;
 
     public String cselekves = "  ";
     // public Szoveg nev_be;
@@ -21,6 +21,7 @@ public class Hero {
     public boolean dead = false, defense_helyez = false, nyert = false;
     public float h, w;
 
+
     Hero(kepernyo_os_obj j, float h_, float w_, String nev_, double hp_, double mana_, double attack_, double defense_, int hanyadik) {
 
 
@@ -29,27 +30,34 @@ public class Hero {
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
 
-        hp_ki = new Szoveg(j);
         warrior = new Szoveg(j);
+        hp_ki = new Szoveg(j);
+        mana_ki = new Szoveg(j);
+        att_ki = new Szoveg(j);
+        def_ki = new Szoveg(j);
+
         hp_ki.ini_render_balra(0, 0, "", betumeret * 2 - 5);
-            if (hanyadik == 0) {
-                big_face = new alakzat(j, "card_big_1.png", 400, false);
+        mana_ki.ini_render_balra(0, 0, "", betumeret * 2 - 5);
+        hp_ki.ini_render_balra(0, 0, "", betumeret * 2 - 5);
 
-            }
-            if (hanyadik == 1) {
-                big_face = new alakzat(j, "card_big_2.png", 400, false);
-            }
-            if (hanyadik == 2) {
-                big_face = new alakzat(j, "card_big_3.png", 400, false);
-            }
 
-            if (hanyadik == 3) {
-                big_face = new alakzat(j, "card_big_4.png", 400, false);
-            }
+        if (hanyadik == 0) {
+            big_face = new alakzat(j, "card_big_1.png", 400, false);
+        }
+        if (hanyadik == 1) {
+            big_face = new alakzat(j, "card_big_2.png", 400, false);
+        }
+        if (hanyadik == 2) {
+            big_face = new alakzat(j, "card_big_3.png", 400, false);
+        }
 
-            if (hanyadik == 4) {
-                big_face = new alakzat(j, "card_big_5.png", 400, false);
-            }
+        if (hanyadik == 3) {
+            big_face = new alakzat(j, "card_big_4.png", 400, false);
+        }
+
+        if (hanyadik == 4) {
+            big_face = new alakzat(j, "card_big_5.png", 400, false);
+        }
 
 
         nev = nev_;
@@ -61,7 +69,8 @@ public class Hero {
         defense = defense_;
         big_face.atmeretez(w / 2, h);
 
-
+        att_ki.ini_render_balra(0, 0, "atk: " +  (int)attack, betumeret * 2 - 5);
+        def_ki.ini_render_balra(0, 0, "def: " + (int)defense, betumeret * 2 - 5);
         warrior.ini_render_balra(0, 0, nev, szovegmeret);
         kiteszi_big();
     }
@@ -71,6 +80,9 @@ public class Hero {
 
         hp_ki.render_balra(batch);
         warrior.render_balra(batch);
+        mana_ki.render_balra(batch);
+        att_ki.render_balra(batch);
+        def_ki.render_balra(batch);
     }
 
     public void render_querry(SpriteBatch batch) {
@@ -95,6 +107,9 @@ public class Hero {
         big_face.atmeretez(w / 2, h);
         warrior.meretez(szovegmeret);
         hp_ki.meretez(szovegmeret);
+        def_ki.meretez(szovegmeret);
+        att_ki.meretez(szovegmeret);
+        mana_ki.meretez(szovegmeret);
     }
 
     Random rnd = new Random();
@@ -103,6 +118,7 @@ public class Hero {
 
         hp = hp_;
         HealthOut();
+        ManahOut();
     }
 
     public void remHealth(double hp_) {
@@ -114,10 +130,18 @@ public class Hero {
             dead = true;
         }
         HealthOut();
+        ManahOut();
     }
 
     public void HealthOut() {
-        hp_ki.szoveg_valtoztat((int) e_hp + " : " + (int) hp);
+        hp_ki.szoveg_valtoztat("HP: " + (int) hp + " : " + (int) e_hp);
+    }
+
+    public void ManahOut() {
+        if (mana<0){
+            mana=0;
+        }
+        mana_ki.szoveg_valtoztat("Mana: " + (int) mana + " : " + (int) e_mana);
     }
 
     public double getHealth() {
@@ -134,6 +158,8 @@ public class Hero {
             double i = mana;
             rd *= (1 + (i / 5));
         }
+        mana -= rd;
+        ManahOut();
         HealthOut();
     }
 
@@ -146,18 +172,26 @@ public class Hero {
             double i = mana;
             def *= (1 + (i / 5));
         }
+        mana -= def;
+        ManahOut();
         HealthOut();
     }
 
     public double attack(Hero kit) {
+        this.attack_ki_helyez();
+        kit.defense_ki_helyez();
         rd = 0;
         if (!kit.dead) {
             rd = attack * (1.0 + (1.15 - 1.0) * rnd.nextDouble());
             if (rnd.nextBoolean())
-                useTSpell();
+                if (mana > 0) {
+                    useTSpell();
+                }
+            rd -= defense(kit);
             if (!kit.dead) {
                 kit.remHealth(rd);
             }
+            ManahOut();
             HealthOut();
         } else {
             return 0;
@@ -165,14 +199,17 @@ public class Hero {
         return rd;
     }
 
-    public double defense() {
+    public double defense(Hero kit) {
 
         def = 0;
-        def = defense * (0.5 + (1.3 - 0.5) * rnd.nextDouble());
+        def = kit.defense * (0.5 + (1.3 - 0.5) * rnd.nextDouble());
 
         if (rnd.nextBoolean())
-            useDSpell();
+            if (mana > 0) {
+                kit.useDSpell();
+            }
         HealthOut();
+        ManahOut();
         return def;
 
     }
@@ -201,17 +238,14 @@ public class Hero {
         big_face.atHelyez(w / 2, 0);
         defense_helyez = true;
         at_helyezi_a_szoveget();
-
     }
 
     public void at_helyezi_a_szoveget() {
-        if (defense_helyez) {
-            warrior.hely_valtoztat(big_face.getX() + big_face.getSzelesseg() - betumeret * 3 - warrior.hatter.getSzelesseg(), h - hp_ki.hatter.getMagassag() - betumeret * 3 + betumeret / 2);
-        } else {
-            warrior.hely_valtoztat(big_face.getX() + betumeret * 3, h - hp_ki.hatter.getMagassag() - betumeret * 3 + betumeret / 2);
-        }
-        hp_ki.hely_valtoztat(big_face.getX() + betumeret * 3, big_face.getY() + betumeret * 15 + betumeret / 2);
-
+        warrior.hely_valtoztat(big_face.getX() + betumeret * 3 + 5, big_face.getY() + betumeret * 15 + betumeret / 2);
+        hp_ki.hely_valtoztat(big_face.getX() + betumeret * 3 + 5, big_face.getY() + betumeret * 12 + betumeret / 2);
+        mana_ki.hely_valtoztat(big_face.getX() + betumeret * 3 + 5, big_face.getY() + betumeret * 9 + betumeret / 2);
+        att_ki.hely_valtoztat(big_face.getX() + betumeret * 3 + 5, big_face.getY() + betumeret * 4 + betumeret / 2);
+        def_ki.hely_valtoztat(big_face.getX() + big_face.getSzelesseg()-betumeret*3-def_ki.hatter.getSzelesseg()-5, big_face.getY() + betumeret * 4 + betumeret / 2);
     }
 
 

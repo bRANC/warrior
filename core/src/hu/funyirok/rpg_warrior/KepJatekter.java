@@ -22,7 +22,8 @@ public class KepJatekter extends kepernyo_os_obj {
     public KepToltes kepernyotoltes;
     public Hero hos1, hos2, hos3, hos4, hos5, hos_tamad, hos_tamad_prev;
     public int lassitas = 0;
-
+    public Hero[] hosok = new Hero[5];
+public int jatekosok=0,elok=0;
     public KepJatekter(GdxAblak ablak) {
         super(ablak);
     }
@@ -32,10 +33,7 @@ public class KepJatekter extends kepernyo_os_obj {
         szovegmeret = betumeret * 2 - 5;
         random = new Random();
         r = new Random();
-/*
-        hos1 = new Hero(this, h, w, "jani", 500, 10, 20, 10, 0);
-        hos2 = new Hero(this, h, w, "Peti", 500, 10, 20, 10, 1);
-  */
+
         if (r.nextBoolean()) {
             hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
             hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
@@ -85,17 +83,10 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
-        hos1.atmeretez(h, w);
-        hos2.atmeretez(h, w);
-        if (ablakRef.kepernyotoltes.jat_3) {
-            hos3.atmeretez(h, w);
-            if (ablakRef.kepernyotoltes.jat_4) {
-                hos4.atmeretez(h, w);
-                if (ablakRef.kepernyotoltes.jat_5) {
-                    hos5.atmeretez(h, w);
-                }
-            }
+        for (int a=0;a<jatekosok;a++){
+            hosok[a].atmeretez(h,w);
         }
+
         aKilep.atHelyez(w - aKilep.getW() - betumeret, h - aKilep.getH() - betumeret);
 
         aNextgame.atmeretez(w / 4, h / 10);
@@ -107,80 +98,36 @@ public class KepJatekter extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_szal() {
-        if (!jatek_vege) {
-            if (tamadhatnak) {
-                if (!tamadot) {
-                    hos1.kiteszi_big();
-                    hos2.kiteszi_big();
-                    hos3.kiteszi_big();
-                    hos4.kiteszi_big();
-                    hos5.kiteszi_big();
-                }
-                if (ablakRef.kepernyotoltes.jat_2) {
-                    if (tamadot) {
-                        hos_tamad = hos_tamad_2(hos1);
-                        System.out.println(hos_tamad);
-                    } else {
-                        if (tamadot_1) {
-                            tamadot_1 = false;
-                            System.out.println(hos_tamad_prev);
-                            hos_tamad_prev = hos_tamad_2(hos_tamad);
-                        } else {
-                            tamadot_1 = true;
-                            System.out.println(hos_tamad);
-                            hos_tamad = hos_tamad_2(hos_tamad_prev);
-                        }
-                    }
 
-                }
-                if (ablakRef.kepernyotoltes.jat_3) {
-                    if (tamadot) {
-                        hos_tamad = hos_tamad_3(hos1);
-                    } else {
-                        if (tamadot_1) {
-                            tamadot_1 = false;
-                            hos_tamad_prev = hos_tamad_3(hos_tamad);
-                        } else {
-                            tamadot_1 = true;
-                            hos_tamad = hos_tamad_3(hos_tamad_prev);
-                        }
-                    }
-
-                }
-                if (ablakRef.kepernyotoltes.jat_4) {
-                    if (tamadot) {
-                        hos_tamad = hos_tamad_4(hos1);
-                    } else {
-                        if (tamadot_1) {
-                            tamadot_1 = false;
-                            hos_tamad_prev = hos_tamad_4(hos_tamad);
-                        } else {
-                            tamadot_1 = true;
-                            hos_tamad = hos_tamad_4(hos_tamad_prev);
-
-                        }
-                    }
-
-                }
-                if (ablakRef.kepernyotoltes.jat_5) {
-
-                    if (tamadot) {
-                        hos_tamad = hos_tamad_5(hos1);
-                    } else {
-
-                        if (tamadot_1) {
-                            tamadot_1 = false;
-                            hos_tamad_prev = hos_tamad_5(hos_tamad);
-                        } else {
-                            tamadot_1 = true;
-                            hos_tamad = hos_tamad_5(hos_tamad_prev);
-                        }
-                    }
+        if (tamadhatnak) {
+            int i = 0;
+            for (int a=0;a<jatekosok;a++){
+                if (hosok[a].dead){
+                    i++;
                 }
             }
+            elok=jatekosok-i;
+            if (i == jatekosok-1) {
+                tamadhatnak = false;
+            }
+            if (!jatek_vege) {
+                int a;
+                int b ;
+
+                do {
+                    a = r.nextInt(jatekosok);
+                    b = r.nextInt(jatekosok);
+                } while (a == b || hosok[a].dead);
+                System.out.println(a+" "+b);
+                hosok[a].attack(hosok[b]);
+            }
+        }else{
+            for (int a=0;a<jatekosok;a++){
+                System.out.print(" " + hosok[a].hp);
+            }
+            System.out.println(" ");
         }
         if (ablakRef.kepernyoMenu.main_menubol)
-
         {
             ablakRef.kepernyoMenu.main_menubol = false;
         }
@@ -197,329 +144,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
     }
 
-    public Hero hos_tamad_2(Hero tamado) {
-        // System.out.println(tamado);
-        tamado.attack_ki_helyez();
-        double tamads_ertek = 0;
-        boolean tamad = false;
-        tamadot = false;
-        if (tamado != hos1) {
-            tamads_ertek = tamado.attack(hos1);
-            hos1.defense_ki_helyez();
-            return hos1;
-        }
-        if (tamado != hos2) {
-            tamads_ertek = tamado.attack(hos2);
-            hos2.defense_ki_helyez();
-            return hos2;
-        }
-        if (tamads_ertek == 0) {
-            tamado.nyert = true;
-        }
 
-        return tamado;
-    }
-
-    public Hero hos_tamad_3(Hero tamado) {
-        return tamado;
-    }
-
-    public Hero hos_tamad_4(Hero tamado) {
-        return tamado;
-    }
-
-    public Hero hos_tamad_5(Hero tamado) {
-        tamado.attack_ki_helyez();
-        double tamads_ertek = 0;
-     /*
-        if (rnd.nextBoolean()) {
-            System.out.println("1. lehetőség");
-            if (tamado != hos3) {
-                tamads_ertek = tamado.attack(hos3);
-            }
-            if (tamads_ertek == 0) {
-                if (tamado != hos4) {
-                    tamads_ertek = tamado.attack(hos4);
-                }
-                if (tamads_ertek == 0) {
-                    if (tamado != hos1) {
-                        tamads_ertek = tamado.attack(hos1);
-                    }
-                    if (tamads_ertek == 0) {
-                        if (tamado != hos2) {
-                            tamads_ertek = tamado.attack(hos2);
-                        }
-                        if (tamads_ertek == 0) {
-                            if (tamado != hos5) {
-                                tamads_ertek = tamado.attack(hos5);
-                            }
-                            if (tamads_ertek == 0) {
-                                tamado.nyert = true;
-                            } else {
-                                hos5.defense_ki_helyez();
-                            }
-                        } else {
-                            hos2.defense_ki_helyez();
-                        }
-                    } else {
-                        hos1.defense_ki_helyez();
-                    }
-                } else {
-                    hos4.defense_ki_helyez();
-                }
-            } else {
-                hos3.defense_ki_helyez();
-            }
-        } else if (rnd.nextBoolean()) {
-            System.out.println("2. lehetőség");
-            if (tamado != hos5) {
-                tamads_ertek = tamado.attack(hos5);
-            }
-            if (tamads_ertek == 0) {
-                if (tamado != hos4) {
-                    tamads_ertek = tamado.attack(hos4);
-                }
-                if (tamads_ertek == 0) {
-                    if (tamado != hos1) {
-                        tamads_ertek = tamado.attack(hos1);
-                    }
-                    if (tamads_ertek == 0) {
-                        if (tamado != hos2) {
-                            tamads_ertek = tamado.attack(hos2);
-                        }
-                        if (tamads_ertek == 0) {
-                            if (tamado != hos3) {
-                                tamads_ertek = tamado.attack(hos3);
-                            }
-                            if (tamads_ertek == 0) {
-                                tamado.nyert = true;
-                            } else {
-                                hos3.defense_ki_helyez();
-                            }
-                        } else {
-                            hos2.defense_ki_helyez();
-                        }
-                    } else {
-                        hos4.defense_ki_helyez();
-                    }
-                } else {
-                    hos1.defense_ki_helyez();
-                }
-            } else {
-                hos5.defense_ki_helyez();
-            }
-        } else if (rnd.nextBoolean()) {
-            System.out.println("3. lehetőség");
-            if (tamado != hos4) {
-                tamads_ertek = tamado.attack(hos4);
-            }
-            if (tamads_ertek == 0) {
-                if (tamado != hos5) {
-                    tamads_ertek = tamado.attack(hos5);
-                }
-                if (tamads_ertek == 0) {
-                    if (tamado != hos1) {
-                        tamads_ertek = tamado.attack(hos1);
-                    }
-                    if (tamads_ertek == 0) {
-                        if (tamado != hos3) {
-                            tamads_ertek = tamado.attack(hos3);
-                        }
-                        if (tamads_ertek == 0) {
-                            if (tamado != hos1) {
-                            }
-                            tamads_ertek = tamado.attack(hos2);
-                            if (tamads_ertek == 0) {
-                                tamado.nyert = true;
-                            } else {
-                                hos2.defense_ki_helyez();
-                            }
-                        } else {
-                            hos3.defense_ki_helyez();
-                        }
-                    } else {
-                        hos5.defense_ki_helyez();
-                    }
-                } else {
-                    hos1.defense_ki_helyez();
-                }
-            } else {
-                hos4.defense_ki_helyez();
-            }
-        } else if (rnd.nextBoolean()) {
-            System.out.println("4. lehetőség");
-            if (tamado != hos2) {
-                tamads_ertek = tamado.attack(hos2);
-            }
-            if (tamads_ertek == 0) {
-                if (tamado != hos5) {
-                    tamads_ertek = tamado.attack(hos5);
-                }
-                if (tamads_ertek == 0) {
-                    if (tamado != hos1) {
-                        tamads_ertek = tamado.attack(hos1);
-                    }
-                    if (tamads_ertek == 0) {
-                        if (tamado != hos4) {
-                            tamads_ertek = tamado.attack(hos4);
-                        }
-                        if (tamads_ertek == 0) {
-                            if (tamado != hos3) {
-                            }
-                            tamads_ertek = tamado.attack(hos3);
-                            if (tamads_ertek == 0) {
-                                tamado.nyert = true;
-                            } else {
-                                hos3.defense_ki_helyez();
-                            }
-                        } else {
-                            hos4.defense_ki_helyez();
-                        }
-                    } else {
-                        hos1.defense_ki_helyez();
-                    }
-                } else {
-                    hos5.defense_ki_helyez();
-                }
-            } else {
-                hos2.defense_ki_helyez();
-            }
-        } else if (rnd.nextBoolean()) {
-            System.out.println("5. lehetőség");
-            if (tamado != hos1) {
-                tamads_ertek = tamado.attack(hos1);
-            }
-            if (tamads_ertek == 0) {
-                if (tamado != hos5) {
-                    tamads_ertek = tamado.attack(hos5);
-                }
-                if (tamads_ertek == 0) {
-                    if (tamado != hos4) {
-                        tamads_ertek = tamado.attack(hos4);
-                    }
-                    if (tamads_ertek == 0) {
-                        if (tamado != hos3) {
-                            tamads_ertek = tamado.attack(hos3);
-                        }
-                        if (tamads_ertek == 0) {
-                            if (tamado != hos2) {
-                            }
-                            tamads_ertek = tamado.attack(hos2);
-                            if (tamads_ertek == 0) {
-                                tamado.nyert = true;
-                            } else {
-                                hos2.defense_ki_helyez();
-                            }
-                        } else {
-                            hos3.defense_ki_helyez();
-                        }
-                    } else {
-                        hos4.defense_ki_helyez();
-                    }
-                } else {
-                    hos5.defense_ki_helyez();
-                }
-            } else {
-                hos1.defense_ki_helyez();
-            }
-        }*/
-
-        boolean hos1_ved, hos2_ved, hos3_ved, hos4_ved, hos5_ved;
-        int random_szam;
-        do {
-            hos1_ved = false;
-            hos2_ved = false;
-            hos3_ved = false;
-            hos4_ved = false;
-            hos5_ved = false;
-            random_szam = r.nextInt(60);
-
-            if (r.nextBoolean()) {
-                if (tamado != hos1) {
-                    System.out.println(hos1.nev);
-                    tamads_ertek = tamado.attack(hos1);
-                    hos1_ved = true;
-                }
-            } else if (r.nextBoolean()) {
-                if (tamado != hos2) {
-                    System.out.println(hos2.nev);
-                    tamads_ertek = tamado.attack(hos2);
-                    hos2_ved = true;
-                }
-            } else if (r.nextBoolean()) {
-                if (tamado != hos3) {
-                    System.out.println(hos3.nev);
-                    tamads_ertek = tamado.attack(hos5);
-                    hos5_ved = true;
-                }
-
-            } else if (r.nextBoolean()) {
-                if (tamado != hos4) {
-                    System.out.println(hos4.nev);
-                    tamads_ertek = tamado.attack(hos4);
-                    hos4_ved = true;
-                }
-            } else if (r.nextBoolean()) {
-                if (tamado != hos5) {
-                    System.out.println(hos5.nev);
-                    tamads_ertek = tamado.attack(hos3);
-                    hos3_ved = true;
-                }
-            }
-
-        } while (tamads_ertek == 0);
-        System.out.println(random_szam);
-        int i=0;
-        if (hos1.dead){
-            i++;
-        }
-        if (hos2.dead){
-            i++;
-        }
-        if (hos3.dead){
-            i++;
-        }
-        if (hos4.dead){
-            i++;
-        }
-        if (i==3){
-           jatek_vege=true;
-        }
-        tamadot = false;
-        if (hos1_ved) {
-            hos1.defense_ki_helyez();
-            return hos1;
-        }
-
-        if (hos2_ved) {
-            hos2.defense_ki_helyez();
-            return hos2;
-        }
-
-        if (hos3_ved) {
-            hos3.defense_ki_helyez();
-            return hos3;
-        }
-
-        if (hos4_ved) {
-            hos4.defense_ki_helyez();
-            return hos4;
-        }
-
-        if (hos5_ved) {
-            hos5.defense_ki_helyez();
-            return hos5;
-        }
-
-
-
-        System.out.println("hiba a mátrixban");
-        return tamado;
-    }
-
-    public boolean getRandomBoolean() {
-        return random.nextBoolean();
-    }
 
     public boolean tap(float x, float y, int count, int button) {
 
@@ -598,26 +223,35 @@ public class KepJatekter extends kepernyo_os_obj {
                     }
                 }
             }
+            hosok[0] = hos1;
+            hosok[1] = hos2;
+            hosok[2] = hos3;
+            hosok[3] = hos4;
+            hosok[4] = hos5;
             //a támadáshoz kell
             if (ablakRef.kepernyotoltes.jat_5) {
                 ablakRef.kepernyotoltes.jat_4 = false;
                 ablakRef.kepernyotoltes.jat_3 = false;
                 ablakRef.kepernyotoltes.jat_2 = false;
+                jatekosok=5;
             }
             if (ablakRef.kepernyotoltes.jat_4) {
                 ablakRef.kepernyotoltes.jat_5 = false;
                 ablakRef.kepernyotoltes.jat_3 = false;
                 ablakRef.kepernyotoltes.jat_2 = false;
+                jatekosok=4;
             }
             if (ablakRef.kepernyotoltes.jat_3) {
                 ablakRef.kepernyotoltes.jat_4 = false;
                 ablakRef.kepernyotoltes.jat_5 = false;
                 ablakRef.kepernyotoltes.jat_2 = false;
+                jatekosok=3;
             }
             if (ablakRef.kepernyotoltes.jat_2) {
                 ablakRef.kepernyotoltes.jat_4 = false;
                 ablakRef.kepernyotoltes.jat_3 = false;
                 ablakRef.kepernyotoltes.jat_5 = false;
+                jatekosok=2;
             }
             System.out.println(ablakRef.kepernyotoltes.jat_5 + "  " + ablakRef.kepernyotoltes.jat_4 + " " + ablakRef.kepernyotoltes.jat_3 + " " + ablakRef.kepernyotoltes.jat_2);
 
