@@ -100,9 +100,10 @@ public boolean elso_fut=true;
 				if (elso_fut){
 					Thread.sleep(17);
 				}else {
-					Thread.sleep(1500); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
+					//Thread.sleep(1000); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
+					Thread.sleep(5);
 				}
-				//Thread.sleep(17); // 60 fps
+				//Thread.sleep(5); // 60 fps
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

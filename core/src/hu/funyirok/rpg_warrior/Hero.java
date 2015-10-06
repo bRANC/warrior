@@ -18,7 +18,7 @@ public class Hero {
     public double hp, e_hp, mana, e_mana, attack, defense, rd, def;
     public int hanyadik;
     public String nev;
-    public boolean dead = false, defense_helyez = false, nyert=false;
+    public boolean dead = false, defense_helyez = false, nyert = false;
     public float h, w;
 
     Hero(kepernyo_os_obj j, float h_, float w_, String nev_, double hp_, double mana_, double attack_, double defense_, int hanyadik) {
@@ -32,14 +32,25 @@ public class Hero {
         hp_ki = new Szoveg(j);
         warrior = new Szoveg(j);
         hp_ki.ini_render_balra(0, 0, "", betumeret * 2 - 5);
+            if (hanyadik == 0) {
+                big_face = new alakzat(j, "card_big_1.png", 400, false);
 
-        if (hanyadik == 0) {
-            big_face = new alakzat(j, "card_big_1.png", 400, false);
+            }
+            if (hanyadik == 1) {
+                big_face = new alakzat(j, "card_big_2.png", 400, false);
+            }
+            if (hanyadik == 2) {
+                big_face = new alakzat(j, "card_big_3.png", 400, false);
+            }
 
-        }
-        if (hanyadik == 1) {
-            big_face = new alakzat(j, "card_big_2.png", 400, false);
-        }
+            if (hanyadik == 3) {
+                big_face = new alakzat(j, "card_big_4.png", 400, false);
+            }
+
+            if (hanyadik == 4) {
+                big_face = new alakzat(j, "card_big_5.png", 400, false);
+            }
+
 
         nev = nev_;
         hp = hp_;
@@ -52,6 +63,7 @@ public class Hero {
 
 
         warrior.ini_render_balra(0, 0, nev, szovegmeret);
+        kiteszi_big();
     }
 
     public void render(SpriteBatch batch) {
@@ -60,6 +72,20 @@ public class Hero {
         hp_ki.render_balra(batch);
         warrior.render_balra(batch);
     }
+
+    public void render_querry(SpriteBatch batch) {
+       /*
+       big_face.rajzol(batch);
+        hp_ki.render_balra(batch);
+        warrior.render_balra(batch);
+        */
+    }
+
+    public void kiteszi_big() {
+        big_face.atHelyez(0 - big_face.getSzelesseg(), 0 - big_face.getMagassag());
+        at_helyezi_a_szoveget();
+    }
+
 
     public void atmeretez(float h_, float w_) {
         h = h_;
@@ -133,7 +159,7 @@ public class Hero {
                 kit.remHealth(rd);
             }
             HealthOut();
-        }else{
+        } else {
             return 0;
         }
         return rd;

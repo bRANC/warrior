@@ -165,7 +165,8 @@ public class KepBekeres extends kepernyo_os_obj {
                     hos5_mana = Double.parseDouble(mana);
                     hos5_attack = Double.parseDouble(attack);
                     hos5_defense = Double.parseDouble(defense);
-
+                    bekerve = true;
+                    ablakRef.kepernyo_csere(ablakRef.kepernyoJatekter);
                 }
             }
             jatekosok++;
