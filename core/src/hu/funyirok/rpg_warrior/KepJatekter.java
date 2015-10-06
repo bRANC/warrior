@@ -483,7 +483,7 @@ public class KepJatekter extends kepernyo_os_obj {
             i++;
         }
         if (i==3){
-
+           jatek_vege=true;
         }
         tamadot = false;
         if (hos1_ved) {
