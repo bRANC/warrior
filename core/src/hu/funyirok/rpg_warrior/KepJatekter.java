@@ -111,13 +111,16 @@ public int jatekosok=0,elok=0;
                 tamadhatnak = false;
             }
             if (!jatek_vege) {
-                int a;
-                int b ;
+                int a,a_=-1;
+                int b;
 
                 do {
                     a = r.nextInt(jatekosok);
                     b = r.nextInt(jatekosok);
-                } while (a == b || hosok[a].dead);
+
+                    //egypár if meg ujra boolean
+                } while (a == b && hosok[a].dead && a_==a);
+                a_=a;
                 System.out.println(a+" "+b);
                 hosok[a].attack(hosok[b]);
             }
