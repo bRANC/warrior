@@ -34,7 +34,6 @@ public int jatekosok=0,elok=0;
         random = new Random();
         r = new Random();
 
-        if (r.nextBoolean()) {
             hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
             hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
             if (ablakRef.kepernyotoltes.jat_3) {
@@ -46,19 +45,7 @@ public int jatekosok=0,elok=0;
                     hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
                 }
             }
-        } else {
-            hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 2);
-            hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
-            if (ablakRef.kepernyotoltes.jat_3) {
-                hos3 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
-            }
-            if (ablakRef.kepernyotoltes.jat_4) {
-                hos4 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 3);
-                if (ablakRef.kepernyotoltes.jat_5) {
-                    hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
-                }
-            }
-        }
+
 
         ablakRef.kepernyotoltes.lefutott = true;
 
@@ -95,7 +82,9 @@ public int jatekosok=0,elok=0;
         aStart.atHelyez(w / 2 - aStart.getW() / 2, h / 2 - aStart.getH() - 100);
 
     }
-
+public boolean tamadas=true;
+    public int a,a_=-1;
+    public int b;
     @Override
     public void jatekmenet_szal() {
 
@@ -111,17 +100,26 @@ public int jatekosok=0,elok=0;
                 tamadhatnak = false;
             }
             if (!jatek_vege) {
-                int a,a_=-1;
-                int b;
-
                 do {
+                    tamadas=false;
                     a = r.nextInt(jatekosok);
                     b = r.nextInt(jatekosok);
-
+                    if (a==b){
+                        System.out.println("a==b "+a+"  "+b);
+                        tamadas=true;
+                    }
+                    if (hosok[b].dead){
+                        System.out.println("hosok[b].dead: "+hosok[b].dead);
+                        tamadas=true;
+                    }
+                    if (a_==b){
+                        System.out.println("a_==b"+a_+"  "+b);
+                        tamadas=true;
+                    }
                     //egypár if meg ujra boolean
-                } while (a == b && hosok[a].dead && a_==a);
-                a_=a;
-                System.out.println(a+" "+b);
+                } while (tamadas);
+
+                a_=b;
                 hosok[a].attack(hosok[b]);
             }
         }else{
