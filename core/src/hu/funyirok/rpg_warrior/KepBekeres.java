@@ -8,11 +8,11 @@ public class KepBekeres extends kepernyo_os_obj {
         super(ablak);
     }
 
-    public float betumeret = h / 40, szovegmeret;
+    public float betumeret = h / 40, szovegmeret, minimeret;
     public String nev = "  ", hp = "  ", mana = "  ", attack = "  ", defense = "  ";
     public int bevitel_szam = 0;
     public Szoveg nev_be, hp_be, mana_be, attack_be, defense_be, hiba_ki;
-    public alakzat aVissza, aNext, aHatter;
+    public alakzat aVissza, aNext, aHatter, aMini_1, aMini_2, aMini_3, aMini_4, aMini_5;
     public String hos1, hos2, hos3, hos4, hos5;
     public double hos1_hp, hos2_hp, hos3_hp, hos4_hp, hos5_hp;
     public double hos1_mana, hos2_mana, hos3_mana, hos4_mana, hos5_mana;
@@ -27,11 +27,20 @@ public class KepBekeres extends kepernyo_os_obj {
     public void jatekmenet_letrehoz() {
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
+        minimeret = betumeret * 8;
         aNext = new alakzat(this, "Next.png", 100, false);
         aNext.atHelyez(w - aNext.getSzelesseg() - betumeret, betumeret);
         aHatter = new alakzat(this, "frame.png", 10, false);
         aHatter.atmeretez(w, h);
         aVissza = new alakzat(this, "vissza.png", 50, false);
+
+        aMini_1 = new alakzat(this, "card_mini_1.png", 50, false);
+        aMini_2 = new alakzat(this, "card_mini_2.png", 50, false);
+        aMini_3 = new alakzat(this, "card_mini_3.png", 50, false);
+        aMini_4 = new alakzat(this, "card_mini_4.png", 50, false);
+        aMini_5 = new alakzat(this, "card_mini_5.png", 50, false);
+
+
         aVissza.atHelyez(w - aVissza.getW() - betumeret, h - aVissza.getH() - betumeret);
         nev = " ";
         hp = " ";
@@ -46,24 +55,42 @@ public class KepBekeres extends kepernyo_os_obj {
         defense = " 10";
 
 
-
         nev_be = new Szoveg(this);
-        nev_be.ini_render_balra(betumeret * 23, h / 2 + betumeret * 12, "Nev:" + nev, szovegmeret);
+        nev_be.ini_render_balra(0, 0, "Nev:" + nev, szovegmeret);
 
         hp_be = new Szoveg(this);
-        hp_be.ini_render_balra(betumeret*8, h / 2 + betumeret *8 , "HP:" + hp + "(10-500)", szovegmeret);
+        hp_be.ini_render_balra(0, 0, "HP:" + hp + "(10-500)", szovegmeret);
 
         mana_be = new Szoveg(this);
-        mana_be.ini_render_balra(betumeret*8, h / 2, "Mana:" + mana + " (0-20)", szovegmeret);
+        mana_be.ini_render_balra(0, 0, "Mana:" + mana + " (0-20)", szovegmeret);
 
         attack_be = new Szoveg(this);
-        attack_be.ini_render_balra(betumeret*30, h / 2 + betumeret * 8 , "Attack:" + attack + " (1-10)", szovegmeret);
+        attack_be.ini_render_balra(0, 0, "Attack:" + attack + " (1-10)", szovegmeret);
 
         defense_be = new Szoveg(this);
-        defense_be.ini_render_balra(betumeret*30, h / 2, "Defense:" + defense + "  (1-10)", szovegmeret);
+        defense_be.ini_render_balra(0, 0, "Defense:" + defense + "  (1-10)", szovegmeret);
 
         hiba_ki = new Szoveg(this);
-        hiba_ki.ini_render_balra(betumeret / 2, h / 2, "Error:" + Hibauzenet, szovegmeret);
+        hiba_ki.ini_render_balra(0, 0, "Error:" + Hibauzenet, szovegmeret);
+
+        aMini_1.atmeretez(minimeret, minimeret);
+        aMini_2.atmeretez(minimeret, minimeret);
+        aMini_3.atmeretez(minimeret, minimeret);
+        aMini_4.atmeretez(minimeret, minimeret);
+        aMini_5.atmeretez(minimeret, minimeret);
+
+        aMini_1.atHelyez(betumeret * 8, h / 2);
+        aMini_2.atHelyez(aMini_1.getX() + aMini_1.getSzelesseg(), aMini_1.getY());
+        aMini_3.atHelyez(aMini_2.getX() + aMini_2.getSzelesseg(), aMini_1.getY());
+        aMini_4.atHelyez(aMini_3.getX() + aMini_3.getSzelesseg(), aMini_1.getY());
+        aMini_5.atHelyez(aMini_4.getX() + aMini_4.getSzelesseg(), aMini_1.getY());
+
+        nev_be.hely_valtoztat(aMini_3.getX() + nev_be.hatter.getSzelesseg() / 2, h / 2 + betumeret * 12);
+        hp_be.hely_valtoztat(aMini_1.getX(), h / 2 + betumeret * 8);
+        mana_be.hely_valtoztat(aMini_1.getX(), h / 2);
+        attack_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - attack_be.hatter.getSzelesseg(), h / 2 + betumeret * 8);
+        defense_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - defense_be.hatter.getSzelesseg(), h / 2);
+
     }
 
     @Override
@@ -71,16 +98,31 @@ public class KepBekeres extends kepernyo_os_obj {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
+        minimeret = betumeret * 8;
 
-        nev_be.hely_valtoztat(betumeret * 23, h / 2 + betumeret * 12);
-        hp_be.hely_valtoztat(betumeret*8, h / 2 + betumeret *8 );
-        mana_be.hely_valtoztat(betumeret*8, h / 2);
-        attack_be.hely_valtoztat(betumeret*30, h / 2 + betumeret * 8);
-        defense_be.hely_valtoztat(betumeret*30, h / 2);
 
         aHatter.atmeretez(w, h);
         aNext.atHelyez(w - aNext.getSzelesseg() - betumeret, betumeret);
         aVissza.atHelyez(w - aVissza.getW() - betumeret, h - aVissza.getH() - betumeret);
+
+
+        aMini_1.atmeretez(minimeret, minimeret);
+        aMini_2.atmeretez(minimeret, minimeret);
+        aMini_3.atmeretez(minimeret, minimeret);
+        aMini_4.atmeretez(minimeret, minimeret);
+        aMini_5.atmeretez(minimeret, minimeret);
+
+        aMini_1.atHelyez(w / 2 - (aMini_1.getSzelesseg() * 5) / 2, h / 2 - aMini_1.getMagassag() - 5);
+        aMini_2.atHelyez(aMini_1.getX() + aMini_1.getSzelesseg(), aMini_1.getY());
+        aMini_3.atHelyez(aMini_2.getX() + aMini_2.getSzelesseg(), aMini_1.getY());
+        aMini_4.atHelyez(aMini_3.getX() + aMini_3.getSzelesseg(), aMini_1.getY());
+        aMini_5.atHelyez(aMini_4.getX() + aMini_4.getSzelesseg(), aMini_1.getY());
+
+        nev_be.hely_valtoztat(aMini_3.getX(), h / 2 + betumeret * 12);
+        hp_be.hely_valtoztat(aMini_1.getX(), h / 2 + betumeret * 8);
+        mana_be.hely_valtoztat(aMini_1.getX(), h / 2);
+        attack_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - attack_be.hatter.getSzelesseg(), h / 2 + betumeret * 8);
+        defense_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - defense_be.hatter.getSzelesseg(), h / 2);
     }
 
     @Override
@@ -100,13 +142,18 @@ public class KepBekeres extends kepernyo_os_obj {
         } else {
             hiba_ki.render_balra(batch);
         }
+        aMini_1.rajzol(batch);
+        aMini_2.rajzol(batch);
+        aMini_3.rajzol(batch);
+        aMini_4.rajzol(batch);
+        aMini_5.rajzol(batch);
         aVissza.rajzol(batch);
         aNext.rajzol(batch);
     }
 
-    public void next_tap_mentes(){
+    public void next_tap_mentes() {
         if (!hiba) {
-            bevitel_szam=0;
+            bevitel_szam = 0;
             if (ablakRef.kepernyotoltes.jat_2) {
                 System.out.println(jatekosok);
                 if (jatekosok == 0) {
@@ -238,7 +285,7 @@ public class KepBekeres extends kepernyo_os_obj {
         if (!hiba) {
             if (/*character == 8 ||*/ character == 9 || character == 13) {//androidon a 8-as az enter gépen viszont a backspace
                 bevitel_szam++;
-                System.out.println("bekérés: "+bevitel_szam);
+                System.out.println("bekérés: " + bevitel_szam);
             }
             if (bevitel_szam == 0) {
                 if (nev.length() > 0) {
