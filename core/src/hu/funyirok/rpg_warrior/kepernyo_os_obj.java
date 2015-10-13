@@ -101,7 +101,7 @@ public boolean elso_fut=true;
 					Thread.sleep(17);
 				}else {
 					//Thread.sleep(1000); // lelas�tja a sz�lat hogy k�nnyebben ki lehessen olvasni az �rt�keket
-					Thread.sleep(200);
+					Thread.sleep(10);
 				}
 				//Thread.sleep(5); // 60 fps
 			} catch (InterruptedException e) {

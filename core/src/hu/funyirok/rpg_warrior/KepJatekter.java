@@ -23,7 +23,9 @@ public class KepJatekter extends kepernyo_os_obj {
     public Hero hos1, hos2, hos3, hos4, hos5, hos_tamad, hos_tamad_prev;
     public int lassitas = 0;
     public Hero[] hosok = new Hero[5];
-public int jatekosok=0,elok=0;
+    public int jatekosok = 0, elok = 0;
+    public Szoveg winner;
+
     public KepJatekter(GdxAblak ablak) {
         super(ablak);
     }
@@ -34,17 +36,17 @@ public int jatekosok=0,elok=0;
         random = new Random();
         r = new Random();
 
-            hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
-            hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
-            if (ablakRef.kepernyotoltes.jat_3) {
-                hos3 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 2);
+        hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
+        hos2 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 1);
+        if (ablakRef.kepernyotoltes.jat_3) {
+            hos3 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 2);
+        }
+        if (ablakRef.kepernyotoltes.jat_4) {
+            hos4 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 3);
+            if (ablakRef.kepernyotoltes.jat_5) {
+                hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
             }
-            if (ablakRef.kepernyotoltes.jat_4) {
-                hos4 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 3);
-                if (ablakRef.kepernyotoltes.jat_5) {
-                    hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
-                }
-            }
+        }
 
 
         ablakRef.kepernyotoltes.lefutott = true;
@@ -61,17 +63,16 @@ public int jatekosok=0,elok=0;
         bg_r = (float) 0.5; // Be�ll�tom a h�tt�rsz�nt...
         bg_g = (float) 0.5;
         bg_b = (float) 0.8;
-
-        bmpfBetu = new BitmapFont();
-        bmpfBetu.setColor(1, 1, 1, 1);
+        winner = new Szoveg(this);
+        winner.ini_render_balra(-50, -200, "Winner: ", betumeret * 2 - 5);
     }
 
     @Override
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
-        for (int a=0;a<jatekosok;a++){
-            hosok[a].atmeretez(h,w);
+        for (int a = 0; a < jatekosok; a++) {
+            hosok[a].atmeretez(h, w);
         }
 
         aKilep.atHelyez(w - aKilep.getW() - betumeret, h - aKilep.getH() - betumeret);
@@ -82,54 +83,56 @@ public int jatekosok=0,elok=0;
         aStart.atHelyez(w / 2 - aStart.getW() / 2, h / 2 - aStart.getH() - 100);
 
     }
-public boolean tamadas=true;
-    public int a,a_=-1;
+
+    public boolean tamadas = true;
+    public int a, a_ = -1;
     public int b;
+
     @Override
     public void jatekmenet_szal() {
 
         if (tamadhatnak) {
             int i = 0;
-            for (int a=0;a<jatekosok;a++){
-                if (hosok[a].dead){
+            for (int a = 0; a < jatekosok; a++) {
+                if (hosok[a].dead) {
                     i++;
                 }
             }
-            elok=jatekosok-i;
-            if (i == jatekosok-1) {
+            elok = jatekosok - i;
+            if (i == jatekosok - 1) {
                 tamadhatnak = false;
             }
             if (!jatek_vege) {
                 do {
-                    tamadas=false;
+                    tamadas = false;
                     a = r.nextInt(jatekosok);
                     b = r.nextInt(jatekosok);
-                    if (a==b){
-                        System.out.println("a==b "+a+"  "+b);
-                        tamadas=true;
+                    if (a == b) {
+
+                        tamadas = true;
                     }
-                    if (hosok[b].dead){
-                        System.out.println("hosok[b].dead: "+hosok[b].dead);
-                        tamadas=true;
+                    if (hosok[b].dead) {
+
+                        tamadas = true;
                     }
-                    if (a_==b){
-                        System.out.println("a_==b"+a_+"  "+b);
-                        tamadas=true;
+                    if (a_ == b) {
+
+                        tamadas = true;
                     }
                     //egypár if meg ujra boolean
                 } while (tamadas);
 
-                a_=b;
+                a_ = b;
                 hosok[a].attack(hosok[b]);
+                querry_helyez();
             }
-        }else{
-            for (int a=0;a<jatekosok;a++){
+        } else {
+            for (int a = 0; a < jatekosok; a++) {
                 System.out.print(" " + hosok[a].hp);
             }
             System.out.println(" ");
         }
-        if (ablakRef.kepernyoMenu.main_menubol)
-        {
+        if (ablakRef.kepernyoMenu.main_menubol) {
             ablakRef.kepernyoMenu.main_menubol = false;
         }
 
@@ -146,7 +149,6 @@ public boolean tamadas=true;
     }
 
 
-
     public boolean tap(float x, float y, int count, int button) {
 
         if (aKilep.benneVaneXY(x, y)) {
@@ -156,71 +158,48 @@ public boolean tamadas=true;
         return false;
     }
 
+    public void querry_helyez() {
+        /*for (int i=0;i<jatekosok;i++   ){
+
+        }*/
+        switch (jatekosok) {
+            case 2:
+                hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                break;
+            case 3:
+                hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                break;
+            case 4:
+                hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos4.mini_face.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                break;
+            case 5:
+                hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos4.mini_face.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos5.mini_face.atHelyez(hos4.mini_face.getX() + hos4.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                break;
+        }
+    }
+
 
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
-       /* if (ablakRef.KepBekeres.bekerve){
-            hos1 = new Hero(this, h, w, ablakRef.KepBekeres.hos1, ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 0);
-            hos2 = new Hero(this, h, w, ablakRef.KepBekeres.hos2, ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 1);
-            if (ablakRef.kepernyotoltes.jat_3) {
-                hos3 = new Hero(this, h, w, ablakRef.KepBekeres.hos3, ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 2);
-                if (ablakRef.kepernyotoltes.jat_4) {
-                    hos4 = new Hero(this, h, w, ablakRef.KepBekeres.hos4, ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 3);
-                    if (ablakRef.kepernyotoltes.jat_5) {
-                        hos5 = new Hero(this, h, w, ablakRef.KepBekeres.hos5, ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, 4);
-                    }
-                }
-            }
-            //a támadáshoz kell
-            if (ablakRef.kepernyotoltes.jat_5) {
-                ablakRef.kepernyotoltes.jat_4 = false;
-                ablakRef.kepernyotoltes.jat_3 = false;
-                ablakRef.kepernyotoltes.jat_2 = false;
-            }
-            if (ablakRef.kepernyotoltes.jat_4) {
-                ablakRef.kepernyotoltes.jat_5 = false;
-                ablakRef.kepernyotoltes.jat_3 = false;
-                ablakRef.kepernyotoltes.jat_2 = false;
-            }
-            if (ablakRef.kepernyotoltes.jat_3) {
-                ablakRef.kepernyotoltes.jat_4 = false;
-                ablakRef.kepernyotoltes.jat_5 = false;
-                ablakRef.kepernyotoltes.jat_2 = false;
-            }
-            if (ablakRef.kepernyotoltes.jat_2) {
-                ablakRef.kepernyotoltes.jat_4 = false;
-                ablakRef.kepernyotoltes.jat_3 = false;
-                ablakRef.kepernyotoltes.jat_5 = false;
-            }
-
-
-            tamadhatnak = true;
-            ablakRef.KepBekeres.bekerve = false;
-        }*/
-
         if (ablakRef.KepBekeres.bekerve) {
-            if (r.nextBoolean()) {
-                hos1 = new Hero(this, h, w, "Eggyik", ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 0);
-                hos2 = new Hero(this, h, w, "Masik", ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 1);
-                if (ablakRef.kepernyotoltes.jat_3) {
-                    hos3 = new Hero(this, h, w, "Megegy", ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 2);
-                    if (ablakRef.kepernyotoltes.jat_4) {
-                        hos4 = new Hero(this, h, w, "calki", ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 3);
-                        if (ablakRef.kepernyotoltes.jat_5) {
-                            hos5 = new Hero(this, h, w, "ezmiez", ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, 4);
-                        }
-                    }
-                }
-            } else {
-                hos1 = new Hero(this, h, w, "Eggyik", ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 2);
-                hos2 = new Hero(this, h, w, "Masik", ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 4);
-                if (ablakRef.kepernyotoltes.jat_3) {
-                    hos3 = new Hero(this, h, w, "Megegy", ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 3);
-                    if (ablakRef.kepernyotoltes.jat_4) {
-                        hos4 = new Hero(this, h, w, "calki", ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 1);
-                        if (ablakRef.kepernyotoltes.jat_5) {
-                            hos5 = new Hero(this, h, w, "ezmiez", ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, 0);
-                        }
+            hos1 = new Hero(this, h, w, "Eggyik", ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 0);
+            hos2 = new Hero(this, h, w, "Masik", ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 1);
+            if (ablakRef.kepernyotoltes.jat_3) {
+                hos3 = new Hero(this, h, w, "Megegy", ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 2);
+                if (ablakRef.kepernyotoltes.jat_4) {
+                    hos4 = new Hero(this, h, w, "calki", ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 3);
+                    if (ablakRef.kepernyotoltes.jat_5) {
+                        hos5 = new Hero(this, h, w, "ezmiez", ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, 4);
                     }
                 }
             }
@@ -234,68 +213,50 @@ public boolean tamadas=true;
                 ablakRef.kepernyotoltes.jat_4 = false;
                 ablakRef.kepernyotoltes.jat_3 = false;
                 ablakRef.kepernyotoltes.jat_2 = false;
-                jatekosok=5;
+                jatekosok = 5;
             }
             if (ablakRef.kepernyotoltes.jat_4) {
                 ablakRef.kepernyotoltes.jat_5 = false;
                 ablakRef.kepernyotoltes.jat_3 = false;
                 ablakRef.kepernyotoltes.jat_2 = false;
-                jatekosok=4;
+                jatekosok = 4;
             }
             if (ablakRef.kepernyotoltes.jat_3) {
                 ablakRef.kepernyotoltes.jat_4 = false;
                 ablakRef.kepernyotoltes.jat_5 = false;
                 ablakRef.kepernyotoltes.jat_2 = false;
-                jatekosok=3;
+                jatekosok = 3;
             }
             if (ablakRef.kepernyotoltes.jat_2) {
                 ablakRef.kepernyotoltes.jat_4 = false;
                 ablakRef.kepernyotoltes.jat_3 = false;
                 ablakRef.kepernyotoltes.jat_5 = false;
-                jatekosok=2;
+                jatekosok = 2;
             }
-            System.out.println(ablakRef.kepernyotoltes.jat_5 + "  " + ablakRef.kepernyotoltes.jat_4 + " " + ablakRef.kepernyotoltes.jat_3 + " " + ablakRef.kepernyotoltes.jat_2);
+
 
             tamadhatnak = true;
             ablakRef.KepBekeres.bekerve = false;
         }
-        aHatter.rajzol(batch);
-        if (ablakRef.kepernyotoltes.jat_5) {
-            hos1.render(batch);
-            hos2.render(batch);
-            hos3.render(batch);
-            hos4.render(batch);
-            hos5.render(batch);
-            hos1.render_querry(batch);
-            hos2.render_querry(batch);
-            hos3.render_querry(batch);
-            hos4.render_querry(batch);
-            hos5.render_querry(batch);
+
+        if (tamadhatnak) {
+            for (int i = 0; i < jatekosok; i++) {
+                hosok[i].render(batch);
+            }
+            for (int i = 0; i < jatekosok; i++) {
+                hosok[i].render_que(batch);
+            }
+        } else {
+            for (int i = 0; i < jatekosok; i++) {
+                if (!hosok[i].dead) {
+                    winner.szoveg_hely_valtoztat(h / 2, w / 2 - winner.hatter.getSzelesseg() / 2, "Winner: " + hosok[i].nev);
+                }
+            }
+            winner.render_balra(batch);
         }
-        if (ablakRef.kepernyotoltes.jat_4) {
-            hos1.render(batch);
-            hos2.render(batch);
-            hos3.render(batch);
-            hos1.render_querry(batch);
-            hos2.render_querry(batch);
-            hos3.render_querry(batch);
-        }
-        if (ablakRef.kepernyotoltes.jat_3) {
-            hos1.render(batch);
-            hos2.render(batch);
-            hos3.render(batch);
-            hos4.render(batch);
-            hos1.render_querry(batch);
-            hos2.render_querry(batch);
-            hos3.render_querry(batch);
-            hos4.render_querry(batch);
-        }
-        if (ablakRef.kepernyotoltes.jat_2) {
-            hos1.render(batch);
-            hos2.render(batch);
-            hos1.render_querry(batch);
-            hos2.render_querry(batch);
-        }
+
+        // aHatter.rajzol(batch);
+
 
         Gdx.graphics.getFramesPerSecond();
 
