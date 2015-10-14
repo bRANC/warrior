@@ -12,7 +12,7 @@ public class Hero {
     public String cselekves = "  ";
     // public Szoveg nev_be;
 
-    public alakzat big_face, mini_face;
+    public alakzat big_face, mini_face,mini_face_dead;
 
     public double hp, e_hp, mana, e_mana, attack, defense, rd, def;
     public int hanyadik;
@@ -44,24 +44,29 @@ public class Hero {
         if (hanyadik == 0) {
             big_face = new alakzat(j, "card_big_1.png", 400, false);
             mini_face = new alakzat(j, "card_mini_1.png", 40, false);
+            mini_face_dead = new alakzat(j, "card_mini_1_dead.png", 40, false);
         }
         if (hanyadik == 1) {
             big_face = new alakzat(j, "card_big_2.png", 400, false);
             mini_face = new alakzat(j, "card_mini_2.png", 40, false);
+            mini_face_dead = new alakzat(j, "card_mini_2_dead.png", 40, false);
         }
         if (hanyadik == 2) {
             big_face = new alakzat(j, "card_big_3.png", 400, false);
             mini_face = new alakzat(j, "card_mini_3.png", 40, false);
+            mini_face_dead = new alakzat(j, "card_mini_3_dead.png", 40, false);
         }
 
         if (hanyadik == 3) {
             big_face = new alakzat(j, "card_big_4.png", 400, false);
             mini_face = new alakzat(j, "card_mini_4.png", 40, false);
+            mini_face_dead = new alakzat(j, "card_mini_4_dead.png", 40, false);
         }
 
         if (hanyadik == 4) {
             big_face = new alakzat(j, "card_big_5.png", 400, false);
             mini_face = new alakzat(j, "card_mini_5.png", 40, false);
+            mini_face_dead = new alakzat(j, "card_mini_5_dead.png", 40, false);
         }
 
 
@@ -77,7 +82,8 @@ public class Hero {
         att_ki.ini_render_balra(0, 0, "atk: " + (int) attack, betumeret * 2 - 5);
         def_ki.ini_render_balra(0, 0, "def: " + (int) defense, betumeret * 2 - 5);
         warrior.ini_render_balra(0, 0, nev, szovegmeret);
-        mini_face.atmeretez(minimeret,minimeret);
+        mini_face.atmeretez(minimeret, minimeret);
+        mini_face_dead.atmeretez(minimeret,minimeret);
         kiteszi_big();
     }
 
@@ -96,7 +102,7 @@ public class Hero {
         if (!dead) {
             mini_face.rajzol(batch);
         }else{
-            //mini_face_dead(batch);
+            mini_face_dead.rajzol(batch);
         }
     }
 
@@ -120,6 +126,7 @@ public class Hero {
         def_ki.meretez(szovegmeret);
         att_ki.meretez(szovegmeret);
         mana_ki.meretez(szovegmeret);
+        mini_face_dead.atmeretez(minimeret,minimeret);
     }
 
     Random rnd = new Random();

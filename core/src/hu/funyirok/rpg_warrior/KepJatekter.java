@@ -108,7 +108,6 @@ public class KepJatekter extends kepernyo_os_obj {
                     a = r.nextInt(jatekosok);
                     b = r.nextInt(jatekosok);
                     if (a == b) {
-
                         tamadas = true;
                     }
                     if (hosok[b].dead) {
@@ -119,7 +118,6 @@ public class KepJatekter extends kepernyo_os_obj {
 
                         tamadas = true;
                     }
-                    //egypár if meg ujra boolean
                 } while (tamadas);
 
                 a_ = b;
@@ -159,20 +157,29 @@ public class KepJatekter extends kepernyo_os_obj {
     }
 
     public void querry_helyez() {
-        /*for (int i=0;i<jatekosok;i++   ){
-
-        }*/
         switch (jatekosok) {
             case 2:
                 hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
                 hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
+                hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face_dead.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 break;
             case 3:
                 hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
                 hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
+                hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face_dead.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos3.mini_face_dead.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 break;
             case 4:
+                hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face_dead.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos3.mini_face_dead.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos4.mini_face_dead.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
                 hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
                 hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
@@ -184,6 +191,12 @@ public class KepJatekter extends kepernyo_os_obj {
                 hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos4.mini_face.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos5.mini_face.atHelyez(hos4.mini_face.getX() + hos4.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
+                hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
+                hos2.mini_face_dead.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos3.mini_face_dead.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos4.mini_face_dead.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+                hos5.mini_face_dead.atHelyez(hos4.mini_face.getX() + hos4.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 break;
         }
     }
