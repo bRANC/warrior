@@ -205,14 +205,14 @@ public class KepJatekter extends kepernyo_os_obj {
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
         if (ablakRef.KepBekeres.bekerve) {
-            hos1 = new Hero(this, h, w, "Eggyik", ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, 0);
-            hos2 = new Hero(this, h, w, "Masik", ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, 1);
+            hos1 = new Hero(this, h, w, ablakRef.KepBekeres.hos1, ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, ablakRef.KepBekeres.hos1_kk);
+            hos2 = new Hero(this, h, w, ablakRef.KepBekeres.hos2, ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, ablakRef.KepBekeres.hos2_kk);
             if (ablakRef.kepernyotoltes.jat_3) {
-                hos3 = new Hero(this, h, w, "Megegy", ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, 2);
+                hos3 = new Hero(this, h, w, ablakRef.KepBekeres.hos3, ablakRef.KepBekeres.hos3_hp, ablakRef.KepBekeres.hos3_mana, ablakRef.KepBekeres.hos3_attack, ablakRef.KepBekeres.hos3_defense, ablakRef.KepBekeres.hos3_kk);
                 if (ablakRef.kepernyotoltes.jat_4) {
-                    hos4 = new Hero(this, h, w, "calki", ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, 3);
+                    hos4 = new Hero(this, h, w, ablakRef.KepBekeres.hos4, ablakRef.KepBekeres.hos4_hp, ablakRef.KepBekeres.hos4_mana, ablakRef.KepBekeres.hos4_attack, ablakRef.KepBekeres.hos4_defense, ablakRef.KepBekeres.hos4_kk);
                     if (ablakRef.kepernyotoltes.jat_5) {
-                        hos5 = new Hero(this, h, w, "ezmiez", ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, 4);
+                        hos5 = new Hero(this, h, w, ablakRef.KepBekeres.hos5, ablakRef.KepBekeres.hos5_hp, ablakRef.KepBekeres.hos5_mana, ablakRef.KepBekeres.hos5_attack, ablakRef.KepBekeres.hos5_defense, ablakRef.KepBekeres.hos5_kk);
                     }
                 }
             }
@@ -266,6 +266,8 @@ public class KepJatekter extends kepernyo_os_obj {
                 }
             }
             winner.render_balra(batch);
+            ablakRef.kepernyotoltes.valasztva=false;
+            ablakRef.kepernyoJatekter.jatek_vege=true;
         }
 
         // aHatter.rajzol(batch);
@@ -278,9 +280,8 @@ public class KepJatekter extends kepernyo_os_obj {
             aHatter.rajzol(batch);
             aStart.rajzol(batch);
         }
-        if (!jatek_vege) {
             aKilep.rajzol(batch);
-        }
+
 
     }
 

@@ -8,6 +8,7 @@ public class KepBekeres extends kepernyo_os_obj {
         super(ablak);
     }
 
+    public boolean mini1 = false, mini2 = false, mini3 = false, mini4 = false, mini5 = false;
     public float betumeret = h / 40, szovegmeret, minimeret;
     public String nev = "  ", hp = "  ", mana = "  ", attack = "  ", defense = "  ";
     public int bevitel_szam = 0;
@@ -18,7 +19,7 @@ public class KepBekeres extends kepernyo_os_obj {
     public double hos1_mana, hos2_mana, hos3_mana, hos4_mana, hos5_mana;
     public double hos1_attack, hos2_attack, hos3_attack, hos4_attack, hos5_attack;
     public double hos1_defense, hos2_defense, hos3_defense, hos4_defense, hos5_defense;
-    public int jatekosok = 0;
+    public int jatekosok = 0, hos1_kk = 1, hos2_kk = 2, hos3_kk = 3, hos4_kk = 4, hos5_kk = 5;
     public boolean bekerve;
     public String Hibauzenet = " ";
     public boolean hiba = false;
@@ -48,11 +49,11 @@ public class KepBekeres extends kepernyo_os_obj {
         attack = " ";
         defense = " ";
 
-        nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
+       /* nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
         hp = " 500";
         mana = " 20";
         attack = " 10";
-        defense = " 10";
+        defense = " 10";*/
 
 
         nev_be = new Szoveg(this);
@@ -85,7 +86,7 @@ public class KepBekeres extends kepernyo_os_obj {
         aMini_4.atHelyez(aMini_3.getX() + aMini_3.getSzelesseg(), aMini_1.getY());
         aMini_5.atHelyez(aMini_4.getX() + aMini_4.getSzelesseg(), aMini_1.getY());
 
-        nev_be.hely_valtoztat(aMini_3.getX() + nev_be.hatter.getSzelesseg() / 2, h / 2 + betumeret * 12);
+        nev_be.hely_valtoztat(aMini_3.getX(), h / 2 + betumeret * 12);
         hp_be.hely_valtoztat(aMini_1.getX(), h / 2 + betumeret * 8);
         mana_be.hely_valtoztat(aMini_1.getX(), h / 2);
         attack_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - attack_be.hatter.getSzelesseg(), h / 2 + betumeret * 8);
@@ -132,6 +133,7 @@ public class KepBekeres extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
+        jatekmenet_atmeretez();
         aHatter.rajzol(batch);
         if (!hiba) {
             nev_be.render_balra(batch);
@@ -142,11 +144,35 @@ public class KepBekeres extends kepernyo_os_obj {
         } else {
             hiba_ki.render_balra(batch);
         }
+       /* if (!mini1) {
+            aMini_1.rajzol(batch);
+        }
+        if (!mini2) {
+            aMini_2.rajzol(batch);
+        }
+        if (!mini3) {
+            aMini_3.rajzol(batch);
+        }
+        if (!mini4) {
+            aMini_4.rajzol(batch);
+        }
+        if (!mini5) {
+            aMini_5.rajzol(batch);
+        }*/
+
         aMini_1.rajzol(batch);
+
         aMini_2.rajzol(batch);
+
+
         aMini_3.rajzol(batch);
+
+
         aMini_4.rajzol(batch);
+
+
         aMini_5.rajzol(batch);
+
         aVissza.rajzol(batch);
         aNext.rajzol(batch);
     }
@@ -223,18 +249,18 @@ public class KepBekeres extends kepernyo_os_obj {
             hiba_ki.szoveg_valtoztat(Hibauzenet);
 
         }
-        nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
+        /*nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
         hp = " 500";
         mana = " 20";
         attack = " 10";
         defense = " 10";
-        /*
+        */
         nev = " ";
         hp = " ";
         mana = " ";
         attack = " ";
         defense = " ";
-        */
+
         nev_be.szoveg_valtoztat("nev:" + nev);
         hp_be.szoveg_valtoztat("HP:" + hp + " (10-500)");
         mana_be.szoveg_valtoztat("Mana:" + mana + " (0-20)");
@@ -255,6 +281,114 @@ public class KepBekeres extends kepernyo_os_obj {
             ablakRef.kepernyotoltes.jat_3 = false;
             ablakRef.kepernyotoltes.jat_4 = false;
             ablakRef.kepernyotoltes.jat_5 = false;
+        }
+
+        if (aMini_1.benneVaneXY(x, y)) {
+
+            switch (jatekosok) {
+                case 0:
+                    hos1_kk  = 1;
+                    break;
+                case 1:
+                    hos2_kk = 1;
+                    break;
+                case 2:
+                    hos3_kk = 1;
+                    break;
+                case 3:
+                    hos4_kk = 1;
+                    break;
+                case 4:
+                    hos5_kk = 1;
+                    break;
+
+            }
+
+        }
+        if (aMini_2.benneVaneXY(x, y)) {
+
+            switch (jatekosok) {
+                case 0:
+                    hos1_kk = 2;
+                    break;
+                case 1:
+                    hos2_kk = 2;
+                    break;
+                case 2:
+                    hos3_kk = 2;
+                    break;
+                case 3:
+                    hos4_kk = 2;
+                    break;
+                case 4:
+                    hos5_kk = 2;
+                    break;
+            }
+
+        }
+        if (aMini_3.benneVaneXY(x, y)) {
+
+            switch (jatekosok) {
+                case 0:
+                    hos1_kk = 3;
+                    break;
+                case 1:
+                    hos2_kk = 3;
+                    break;
+                case 2:
+                    hos3_kk = 3;
+                    break;
+                case 3:
+                    hos4_kk = 3;
+                    break;
+                case 4:
+                    hos5_kk = 3;
+                    break;
+            }
+
+        }
+        if (aMini_4.benneVaneXY(x, y)) {
+
+            switch (jatekosok) {
+                case 0:
+                    hos1_kk = 4;
+                    break;
+                case 1:
+                    hos2_kk = 4;
+                    break;
+                case 2:
+                    hos3_kk = 4;
+                    break;
+                case 3:
+                    hos4_kk = 4;
+                    break;
+                case 4:
+                    hos5_kk = 4;
+                    break;
+            }
+
+        }
+        if (aMini_5.benneVaneXY(x, y)) {
+
+
+            switch (jatekosok) {
+                case 0:
+                    hos1_kk = 5;
+                    break;
+                case 1:
+                    hos2_kk = 5;
+                    break;
+                case 2:
+                    hos3_kk = 5;
+                    break;
+                case 3:
+                    hos4_kk = 5;
+                    break;
+                case 4:
+                    hos5_kk = 5;
+                    break;
+            }
+
         }
         if (nev_be.erintve(x, y)) {
             bevitel_szam = 0;
@@ -359,7 +493,7 @@ public class KepBekeres extends kepernyo_os_obj {
                 }
                 defense_be.szoveg_valtoztat("Defense:" + defense + " (1-10)");
             }
-            if (bevitel_szam == 5) {
+            if (bevitel_szam >= 5) {
                 validalas();
             }
         }
@@ -392,14 +526,13 @@ public class KepBekeres extends kepernyo_os_obj {
             Hibauzenet += "Empty ";
             hiba = true;
         }
-
-
         if (!hiba) {
             Hibauzenet = " ";
         } else {
             Hibauzenet += "is out of expection";
             hiba_ki.szoveg_valtoztat(Hibauzenet);
         }
+
         next_tap_mentes();
     }
 

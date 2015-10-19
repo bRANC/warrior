@@ -83,8 +83,6 @@ public class KepMenu extends kepernyo_os_obj {
 
         if (aStart.benneVaneXY(x, y)) {
             kattintva = true;
-
-
             if (!ablakRef.kepernyotoltes.valasztva) {
                 main_menubol = true;
                 ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
