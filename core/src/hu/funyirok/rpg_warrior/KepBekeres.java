@@ -19,7 +19,7 @@ public class KepBekeres extends kepernyo_os_obj {
     public double hos1_mana, hos2_mana, hos3_mana, hos4_mana, hos5_mana;
     public double hos1_attack, hos2_attack, hos3_attack, hos4_attack, hos5_attack;
     public double hos1_defense, hos2_defense, hos3_defense, hos4_defense, hos5_defense;
-    public int jatekosok = 0, hos1_kk = 1, hos2_kk = 2, hos3_kk = 3, hos4_kk = 4, hos5_kk = 5;
+    public int jatekosok = 0, hos1_kk = 0, hos2_kk = 1, hos3_kk = 2, hos4_kk = 3, hos5_kk = 4;
     public boolean bekerve;
     public String Hibauzenet = " ";
     public boolean hiba = false;
@@ -270,6 +270,28 @@ public class KepBekeres extends kepernyo_os_obj {
 
             switch (jatekosok) {
                 case 0:
+                    hos1_kk = 0;
+                    break;
+                case 1:
+                    hos2_kk = 0;
+                    break;
+                case 2:
+                    hos3_kk = 0;
+                    break;
+                case 3:
+                    hos4_kk = 0;
+                    break;
+                case 4:
+                    hos5_kk = 0;
+                    break;
+
+            }
+
+        }
+        if (aMini_2.benneVaneXY(x, y)) {
+
+            switch (jatekosok) {
+                case 0:
                     hos1_kk = 1;
                     break;
                 case 1:
@@ -284,11 +306,10 @@ public class KepBekeres extends kepernyo_os_obj {
                 case 4:
                     hos5_kk = 1;
                     break;
-
             }
 
         }
-        if (aMini_2.benneVaneXY(x, y)) {
+        if (aMini_3.benneVaneXY(x, y)) {
 
             switch (jatekosok) {
                 case 0:
@@ -309,14 +330,15 @@ public class KepBekeres extends kepernyo_os_obj {
             }
 
         }
-        if (aMini_3.benneVaneXY(x, y)) {
+        if (aMini_4.benneVaneXY(x, y)) {
 
             switch (jatekosok) {
                 case 0:
                     hos1_kk = 3;
                     break;
                 case 1:
-                    hos2_kk = 3;
+                    hos2_kk = 3
+                    ;
                     break;
                 case 2:
                     hos3_kk = 3;
@@ -330,7 +352,8 @@ public class KepBekeres extends kepernyo_os_obj {
             }
 
         }
-        if (aMini_4.benneVaneXY(x, y)) {
+        if (aMini_5.benneVaneXY(x, y)) {
+
 
             switch (jatekosok) {
                 case 0:
@@ -347,28 +370,6 @@ public class KepBekeres extends kepernyo_os_obj {
                     break;
                 case 4:
                     hos5_kk = 4;
-                    break;
-            }
-
-        }
-        if (aMini_5.benneVaneXY(x, y)) {
-
-
-            switch (jatekosok) {
-                case 0:
-                    hos1_kk = 5;
-                    break;
-                case 1:
-                    hos2_kk = 5;
-                    break;
-                case 2:
-                    hos3_kk = 5;
-                    break;
-                case 3:
-                    hos4_kk = 5;
-                    break;
-                case 4:
-                    hos5_kk = 5;
                     break;
             }
 
