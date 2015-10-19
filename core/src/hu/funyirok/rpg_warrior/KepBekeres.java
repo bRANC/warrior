@@ -141,37 +141,17 @@ public class KepBekeres extends kepernyo_os_obj {
             mana_be.render_balra(batch);
             attack_be.render_balra(batch);
             defense_be.render_balra(batch);
+
+            aMini_1.rajzol(batch);
+            aMini_2.rajzol(batch);
+            aMini_3.rajzol(batch);
+            aMini_4.rajzol(batch);
+            aMini_5.rajzol(batch);
         } else {
             hiba_ki.render_balra(batch);
         }
-       /* if (!mini1) {
-            aMini_1.rajzol(batch);
-        }
-        if (!mini2) {
-            aMini_2.rajzol(batch);
-        }
-        if (!mini3) {
-            aMini_3.rajzol(batch);
-        }
-        if (!mini4) {
-            aMini_4.rajzol(batch);
-        }
-        if (!mini5) {
-            aMini_5.rajzol(batch);
-        }*/
-
-        aMini_1.rajzol(batch);
-
-        aMini_2.rajzol(batch);
 
 
-        aMini_3.rajzol(batch);
-
-
-        aMini_4.rajzol(batch);
-
-
-        aMini_5.rajzol(batch);
 
         aVissza.rajzol(batch);
         aNext.rajzol(batch);
@@ -244,10 +224,9 @@ public class KepBekeres extends kepernyo_os_obj {
             }
             jatekosok++;
         } else {
-            Hibauzenet = " ";
-            hiba = false;
             hiba_ki.szoveg_valtoztat(Hibauzenet);
-
+            hiba_ki.hely_valtoztat(w/2-hiba_ki.hatter.getSzelesseg()/2,h/2);
+            Hibauzenet = " ";
         }
         /*nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
         hp = " 500";
@@ -272,7 +251,11 @@ public class KepBekeres extends kepernyo_os_obj {
     @Override
     public boolean tap(float x, float y, int count, int button) {
         if (aNext.benneVaneXY(x, y)) {
-            validalas();
+            if (hiba) {
+                hiba = false;
+            } else {
+                validalas();
+            }
         }
         if (aVissza.benneVaneXY(x, y)) {
             ablakRef.kepernyo_csere(ablakRef.kepernyotoltes);
@@ -287,7 +270,7 @@ public class KepBekeres extends kepernyo_os_obj {
 
             switch (jatekosok) {
                 case 0:
-                    hos1_kk  = 1;
+                    hos1_kk = 1;
                     break;
                 case 1:
                     hos2_kk = 1;
@@ -529,7 +512,7 @@ public class KepBekeres extends kepernyo_os_obj {
         if (!hiba) {
             Hibauzenet = " ";
         } else {
-            Hibauzenet += "is out of expection";
+            Hibauzenet += "is out of expection, Please retry.";
             hiba_ki.szoveg_valtoztat(Hibauzenet);
         }
 
