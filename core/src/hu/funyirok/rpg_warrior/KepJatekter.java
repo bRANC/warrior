@@ -14,13 +14,10 @@ public class KepJatekter extends kepernyo_os_obj {
     // protected Szoveg betuiras = new Szoveg(this);
     alakzat aKilep, aHatter, aNextgame;
     alakzat aStart;
-    private Random random;
     public Random r;
-    public boolean kesz = false, jatek_vege = false, nyertes = false, jatekos_ido_vege = false, tamadot = true, tamadot_1 = true, tamadhatnak = false;
+    public boolean  jatek_vege = false, jatekos_ido_vege = false, tamadhatnak = false;
     BitmapFont bmpfBetu;
-    public KepMenu menu;
-    public KepToltes kepernyotoltes;
-    public Hero hos1, hos2, hos3, hos4, hos5, hos_tamad, hos_tamad_prev;
+    public Hero hos1, hos2, hos3, hos4, hos5;
     public int lassitas = 0;
     public Hero[] hosok = new Hero[5];
     public int jatekosok = 0, elok = 0;
@@ -33,7 +30,7 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_letrehoz() {
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
-        random = new Random();
+
         r = new Random();
 
         hos1 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 0);
@@ -47,7 +44,6 @@ public class KepJatekter extends kepernyo_os_obj {
                 hos5 = new Hero(this, h, w, "  ", 500, 10, 20, 10, 4);
             }
         }
-
 
         ablakRef.kepernyotoltes.lefutott = true;
 
@@ -164,6 +160,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
                 hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
                 hos2.mini_face_dead.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
                 break;
             case 3:
                 hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
@@ -173,6 +170,7 @@ public class KepJatekter extends kepernyo_os_obj {
                 hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
                 hos2.mini_face_dead.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos3.mini_face_dead.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
                 break;
             case 4:
                 hos1.mini_face_dead.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
@@ -180,10 +178,12 @@ public class KepJatekter extends kepernyo_os_obj {
                 hos3.mini_face_dead.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos4.mini_face_dead.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
 
+
                 hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
                 hos2.mini_face.atHelyez(hos1.mini_face.getX() + hos1.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos3.mini_face.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos4.mini_face.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
                 break;
             case 5:
                 hos1.mini_face.atHelyez((w / 2) - (jatekosok * hos1.mini_face.getSzelesseg() / 2), h - hos1.mini_face.getMagassag());
@@ -197,6 +197,8 @@ public class KepJatekter extends kepernyo_os_obj {
                 hos3.mini_face_dead.atHelyez(hos2.mini_face.getX() + hos2.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos4.mini_face_dead.atHelyez(hos3.mini_face.getX() + hos3.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
                 hos5.mini_face_dead.atHelyez(hos4.mini_face.getX() + hos4.mini_face.getSzelesseg(), h - hos1.mini_face.getMagassag());
+
+
                 break;
         }
     }
@@ -290,7 +292,6 @@ public class KepJatekter extends kepernyo_os_obj {
         aStart.dispose();
         aNextgame.dispose();
         aKilep.dispose();
-//        betuiras.dispose();
         aHatter.dispose();
 
         // finalize();

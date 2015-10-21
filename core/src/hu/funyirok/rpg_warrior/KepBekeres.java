@@ -12,7 +12,7 @@ public class KepBekeres extends kepernyo_os_obj {
     public float betumeret = h / 40, szovegmeret, minimeret;
     public String nev = "  ", hp = "  ", mana = "  ", attack = "  ", defense = "  ";
     public int bevitel_szam = 0;
-    public Szoveg nev_be, hp_be, mana_be, attack_be, defense_be, hiba_ki;
+    public Szoveg nev_be, hp_be, mana_be, attack_be, defense_be, hiba_ki,playerszam_ki;
     public alakzat aVissza, aNext, aHatter, aMini_1, aMini_2, aMini_3, aMini_4, aMini_5;
     public String hos1, hos2, hos3, hos4, hos5;
     public double hos1_hp, hos2_hp, hos3_hp, hos4_hp, hos5_hp;
@@ -74,6 +74,11 @@ public class KepBekeres extends kepernyo_os_obj {
         hiba_ki = new Szoveg(this);
         hiba_ki.ini_render_balra(0, 0, "Error:" + Hibauzenet, szovegmeret);
 
+        playerszam_ki = new Szoveg(this);
+        playerszam_ki.ini_render_balra(0, 0, "Player " + jatekosok + 1, szovegmeret);
+        playerszam_ki.szoveg_valtoztat("Player " + (jatekosok + 1));
+
+
         aMini_1.atmeretez(minimeret, minimeret);
         aMini_2.atmeretez(minimeret, minimeret);
         aMini_3.atmeretez(minimeret, minimeret);
@@ -91,6 +96,7 @@ public class KepBekeres extends kepernyo_os_obj {
         mana_be.hely_valtoztat(aMini_1.getX(), h / 2);
         attack_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - attack_be.hatter.getSzelesseg(), h / 2 + betumeret * 8);
         defense_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - defense_be.hatter.getSzelesseg(), h / 2);
+        playerszam_ki.hely_valtoztat(aMini_3.getX(), nev_be.hatter.getX()+nev_be.hatter.getMagassag()*2);
 
     }
 
@@ -119,11 +125,12 @@ public class KepBekeres extends kepernyo_os_obj {
         aMini_4.atHelyez(aMini_3.getX() + aMini_3.getSzelesseg(), aMini_1.getY());
         aMini_5.atHelyez(aMini_4.getX() + aMini_4.getSzelesseg(), aMini_1.getY());
 
-        nev_be.hely_valtoztat(aMini_3.getX(), h / 2 + betumeret * 12);
+        nev_be.hely_valtoztat(w/2-nev_be.hatter.getSzelesseg()/2, h / 2 + betumeret * 12);
         hp_be.hely_valtoztat(aMini_1.getX(), h / 2 + betumeret * 8);
         mana_be.hely_valtoztat(aMini_1.getX(), h / 2);
         attack_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - attack_be.hatter.getSzelesseg(), h / 2 + betumeret * 8);
         defense_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - defense_be.hatter.getSzelesseg(), h / 2);
+        playerszam_ki.hely_valtoztat(w/2-playerszam_ki.hatter.getSzelesseg()/2, h / 2 + betumeret * 16);
     }
 
     @Override
@@ -141,6 +148,7 @@ public class KepBekeres extends kepernyo_os_obj {
             mana_be.render_balra(batch);
             attack_be.render_balra(batch);
             defense_be.render_balra(batch);
+            playerszam_ki.render_balra(batch);
 
             aMini_1.rajzol(batch);
             aMini_2.rajzol(batch);
@@ -159,6 +167,7 @@ public class KepBekeres extends kepernyo_os_obj {
 
     public void next_tap_mentes() {
         if (!hiba) {
+            playerszam_ki.szoveg_valtoztat("Player " + jatekosok + 1);
             bevitel_szam = 0;
             if (ablakRef.kepernyotoltes.jat_2) {
                 System.out.println(jatekosok);
