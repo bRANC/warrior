@@ -19,9 +19,9 @@ public class KepSugo extends kepernyo_os_obj {
 	@Override
 	public void jatekmenet_letrehoz() {
 
-		aKilep = new alakzat(this, "vissza.png", 40, false);
+		aKilep = new alakzat(this, "vissza.png", 60, false);
 		aMini = new alakzat(this, "valami.png", w, false);
-		aHatter = new alakzat(this, "frame.png", 500, false);
+		aHatter = new alakzat(this, "halp_tut.png", 500, false);
 
 		
 		

@@ -28,7 +28,7 @@ public class KepBekeres extends kepernyo_os_obj {
         betumeret = h / 40;
         szovegmeret = betumeret * 2 - 5;
         minimeret = betumeret * 8;
-        aNext = new alakzat(this, "Next.png", 100, false);
+        aNext = new alakzat(this, "Next.png", 1000, false);
         aNext.atHelyez(w - aNext.getSzelesseg() - betumeret, betumeret);
         aHatter = new alakzat(this, "frame.png", 10, false);
         aHatter.atmeretez(w, h);
@@ -103,6 +103,7 @@ public class KepBekeres extends kepernyo_os_obj {
 
 
         aHatter.atmeretez(w, h);
+        aNext.atmeretez(w/15,h/10);
         aNext.atHelyez(w - aNext.getSzelesseg() - betumeret, betumeret);
         aVissza.atHelyez(w - aVissza.getW() - betumeret, h - aVissza.getH() - betumeret);
 
@@ -119,7 +120,7 @@ public class KepBekeres extends kepernyo_os_obj {
         aMini_4.atHelyez(aMini_3.getX() + aMini_3.getSzelesseg(), aMini_1.getY());
         aMini_5.atHelyez(aMini_4.getX() + aMini_4.getSzelesseg(), aMini_1.getY());
 
-        nev_be.hely_valtoztat(w/2-nev_be.hatter.getSzelesseg()/2, h / 2 + betumeret * 12);
+        nev_be.hely_valtoztat(w / 2 - nev_be.hatter.getSzelesseg() / 2, h / 2 + betumeret * 12);
         hp_be.hely_valtoztat(aMini_1.getX(), h / 2 + betumeret * 8);
         mana_be.hely_valtoztat(aMini_1.getX(), h / 2);
         attack_be.hely_valtoztat(aMini_5.getX() + aMini_5.getSzelesseg() - attack_be.hatter.getSzelesseg(), h / 2 + betumeret * 8);
@@ -161,7 +162,7 @@ public class KepBekeres extends kepernyo_os_obj {
 
     public void next_tap_mentes() {
         if (!hiba) {
-            playerszam_ki.szoveg_valtoztat("Player " + jatekosok + 1);
+            playerszam_ki.szoveg_valtoztat("Player " + (jatekosok + 1));
             bevitel_szam = 0;
             if (ablakRef.kepernyotoltes.jat_2) {
                 System.out.println(jatekosok);
@@ -228,7 +229,7 @@ public class KepBekeres extends kepernyo_os_obj {
             jatekosok++;
         } else {
             hiba_ki.szoveg_valtoztat(Hibauzenet);
-            hiba_ki.hely_valtoztat(w/2-hiba_ki.hatter.getSzelesseg()/2,h/2);
+            hiba_ki.hely_valtoztat(0,h/2-hiba_ki.hatter.getMagassag()/2);
             Hibauzenet = " ";
         }
         /*nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét

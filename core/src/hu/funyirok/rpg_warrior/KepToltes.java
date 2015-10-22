@@ -10,6 +10,8 @@ public class KepToltes extends kepernyo_os_obj {
     public boolean jat_2 = false, jat_3 = false, jat_4 = false, jat_5 = false, valasztva = false;
     public float betumeret = h / 40;
 
+
+
     public boolean lefutott;
 
     public KepToltes(GdxAblak ablak) {
@@ -75,6 +77,8 @@ public class KepToltes extends kepernyo_os_obj {
         //kiertekeles();
 
         if (valasztva) {
+            ablakRef.KepBekeres.bevitel_szam=0;
+            ablakRef.KepBekeres.jatekosok=0;
             ablakRef.kepernyoMenu.jatekbaugras=true;
             ablakRef.kepernyoJatekter.jatekmenet_megszuntet();
             ablakRef.kepernyoJatekter = null;
@@ -102,6 +106,7 @@ public class KepToltes extends kepernyo_os_obj {
         if (jat2.benneVaneXY(x, y)) {
             jat_2 = true;
             valasztva = true;
+
         }
         if (jat3.benneVaneXY(x, y)) {
             jat_2=true;

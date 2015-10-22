@@ -15,13 +15,14 @@ public class KepJatekter extends kepernyo_os_obj {
     alakzat aKilep, aHatter, aNextgame;
     alakzat aStart;
     public Random r;
-    public boolean  jatek_vege = false, jatekos_ido_vege = false, tamadhatnak = false;
+    public boolean jatek_vege = false, jatekos_ido_vege = false, tamadhatnak = false;
     BitmapFont bmpfBetu;
     public Hero hos1, hos2, hos3, hos4, hos5;
     public int lassitas = 0;
     public Hero[] hosok = new Hero[5];
     public int jatekosok = 0, elok = 0;
     public Szoveg winner;
+    public Hero utolso, utolso_elotti;
 
     public KepJatekter(GdxAblak ablak) {
         super(ablak);
@@ -55,7 +56,7 @@ public class KepJatekter extends kepernyo_os_obj {
         aKilep.atHelyez(w - aKilep.getW() - betumeret, h - aKilep.getH() - betumeret);
         aHatter = new alakzat(this, "frame.png", 10, false);
         aHatter.atmeretez(w, h);
-        aHatter.atHelyez(0,0);
+        aHatter.atHelyez(0, 0);
 
         bg_r = (float) 0.5; // Be�ll�tom a h�tt�rsz�nt...
         bg_g = (float) 0.5;
@@ -69,7 +70,7 @@ public class KepJatekter extends kepernyo_os_obj {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
         aHatter.atmeretez(w, h);
-        aHatter.atHelyez(0,0);
+        aHatter.atHelyez(0, 0);
         for (int a = 0; a < jatekosok; a++) {
             hosok[a].atmeretez(h, w);
         }
@@ -89,7 +90,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_szal() {
-
+        boolean motva = true;
         if (tamadhatnak) {
             int i = 0;
             for (int a = 0; a < jatekosok; a++) {
@@ -98,6 +99,18 @@ public class KepJatekter extends kepernyo_os_obj {
                 }
             }
             elok = jatekosok - i;
+            if (elok == 2) {
+                for (int a = 0; a < jatekosok; a++) {
+                    if (!hosok[a].dead) {
+                        if (motva) {
+                            utolso = hosok[a];
+                            motva = false;
+                        } else {
+                            utolso_elotti = hosok[a];
+                        }
+                    }
+                }
+            }
             if (i == jatekosok - 1) {
                 tamadhatnak = false;
             }
@@ -252,8 +265,6 @@ public class KepJatekter extends kepernyo_os_obj {
                 ablakRef.kepernyotoltes.jat_5 = false;
                 jatekosok = 2;
             }
-
-
             tamadhatnak = true;
             ablakRef.KepBekeres.bekerve = false;
         }
@@ -266,28 +277,29 @@ public class KepJatekter extends kepernyo_os_obj {
                 hosok[i].render_que(batch);
             }
         } else {
+            if (utolso.dead && utolso_elotti.dead) {
+                winner.szoveg_hely_valtoztat(h / 2 - winner.hatter.getMagassag() / 2, w / 2 - winner.hatter.getSzelesseg() / 2, "Draw");
+            }
             for (int i = 0; i < jatekosok; i++) {
                 if (!hosok[i].dead) {
-                    winner.szoveg_hely_valtoztat(h / 2, w / 2 - winner.hatter.getSzelesseg() / 2, "Winner: " + hosok[i].nev);
+                    winner.szoveg_hely_valtoztat(w / 2 - winner.hatter.getSzelesseg() / 2, h -szovegmeret, "Winner!!");
                     hosok[i].winner_ki_helyez();
+                    hosok[i].render(batch);
+                    winner.render_balra(batch);
                 }
             }
-            winner.render_balra(batch);
-            ablakRef.kepernyotoltes.valasztva=false;
-            ablakRef.kepernyoJatekter.jatek_vege=true;
+            ablakRef.kepernyotoltes.valasztva = false;
+            ablakRef.kepernyoJatekter.jatek_vege = true;
         }
-
-        // aHatter.rajzol(batch);
 
 
         Gdx.graphics.getFramesPerSecond();
 
         if (jatekos_ido_vege) {
             jatek_vege = true;
-            aHatter.rajzol(batch);
             aStart.rajzol(batch);
         }
-            aKilep.rajzol(batch);
+        aKilep.rajzol(batch);
 
 
     }

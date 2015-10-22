@@ -140,7 +140,7 @@ public class Hero {
 
     public void remHealth(double hp_) {
         setHealth(getHealth() - hp_);
-        if (getHealth() < 0) {
+        if (getHealth() < 1) {
             hp = 0;
         }
         if (hp == 0) {
@@ -247,10 +247,10 @@ public class Hero {
     }
 
     public void winner_ki_helyez(){
-        big_face.atmeretez(w/3,h-5);
+        big_face.atmeretez(w/2,h);
+        big_face.atHelyez(w/2-big_face.getSzelesseg()/2,0);
         at_helyezi_a_szoveget();
     }
-
 
     public void at_helyezi_a_szoveget() {
         warrior.hely_valtoztat(big_face.getX() + betumeret * 3 + 5, big_face.getY() + betumeret * 15 + betumeret / 2);
