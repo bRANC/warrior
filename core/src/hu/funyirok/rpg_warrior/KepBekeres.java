@@ -8,7 +8,6 @@ public class KepBekeres extends kepernyo_os_obj {
         super(ablak);
     }
 
-    public boolean mini1 = false, mini2 = false, mini3 = false, mini4 = false, mini5 = false;
     public float betumeret = h / 40, szovegmeret, minimeret;
     public String nev = "  ", hp = "  ", mana = "  ", attack = "  ", defense = "  ";
     public int bevitel_szam = 0;
@@ -49,11 +48,6 @@ public class KepBekeres extends kepernyo_os_obj {
         attack = " ";
         defense = " ";
 
-       /* nev = " ";  // csak hogy ne keljen mindig be írni az harcosok értékét
-        hp = " 500";
-        mana = " 20";
-        attack = " 10";
-        defense = " 10";*/
 
 
         nev_be = new Szoveg(this);

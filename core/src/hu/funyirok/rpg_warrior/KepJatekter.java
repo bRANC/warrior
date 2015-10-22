@@ -53,8 +53,9 @@ public class KepJatekter extends kepernyo_os_obj {
 
         aKilep = new alakzat(this, "vissza.png", 50, false);
         aKilep.atHelyez(w - aKilep.getW() - betumeret, h - aKilep.getH() - betumeret);
-        aHatter = new alakzat(this, "hatterspace.jpg", 10, false);
-
+        aHatter = new alakzat(this, "frame.png", 10, false);
+        aHatter.atmeretez(w, h);
+        aHatter.atHelyez(0,0);
 
         bg_r = (float) 0.5; // Be�ll�tom a h�tt�rsz�nt...
         bg_g = (float) 0.5;
@@ -67,6 +68,8 @@ public class KepJatekter extends kepernyo_os_obj {
     public void jatekmenet_atmeretez() {
         super.jatekmenet_atmeretez();
         betumeret = h / 40;
+        aHatter.atmeretez(w, h);
+        aHatter.atHelyez(0,0);
         for (int a = 0; a < jatekosok; a++) {
             hosok[a].atmeretez(h, w);
         }
@@ -206,6 +209,7 @@ public class KepJatekter extends kepernyo_os_obj {
 
     @Override
     public void jatekmenet_render(SpriteBatch batch) {
+        aHatter.rajzol(batch);
         if (ablakRef.KepBekeres.bekerve) {
             hos1 = new Hero(this, h, w, ablakRef.KepBekeres.hos1, ablakRef.KepBekeres.hos1_hp, ablakRef.KepBekeres.hos1_mana, ablakRef.KepBekeres.hos1_attack, ablakRef.KepBekeres.hos1_defense, ablakRef.KepBekeres.hos1_kk);
             hos2 = new Hero(this, h, w, ablakRef.KepBekeres.hos2, ablakRef.KepBekeres.hos2_hp, ablakRef.KepBekeres.hos2_mana, ablakRef.KepBekeres.hos2_attack, ablakRef.KepBekeres.hos2_defense, ablakRef.KepBekeres.hos2_kk);
@@ -265,6 +269,7 @@ public class KepJatekter extends kepernyo_os_obj {
             for (int i = 0; i < jatekosok; i++) {
                 if (!hosok[i].dead) {
                     winner.szoveg_hely_valtoztat(h / 2, w / 2 - winner.hatter.getSzelesseg() / 2, "Winner: " + hosok[i].nev);
+                    hosok[i].winner_ki_helyez();
                 }
             }
             winner.render_balra(batch);
